@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templateSansMenu.xhtml">
+	<ui:define name="titre">Compte : résumé</ui:define>
+	<ui:define name="mainPage">
+		<div class="check_box">
+			<div class="col-md-12">
+				<nav>
+					<div class="menu_box">
+						<h3 class="menu_head">Mon compte</h3>
+						<ul class="nav">
+							<li><a href="#" >Résumé</a></li>
+							<li><a href="#">Informations personnels</a></li>
+							<li><a href="#">Adresses</a></li>
+							<li><a href="#">Réductions</a></li>
+							<li><h:commandLink value="Historique des commandes" action="#{historiqueCommandeMb.afficherHistoriqueCommande()}" /></li>
+							<li><a href="#">Historique des ventes</a></li>
+							<li><a href="#">Liste de souhait</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			<div class="col-md-12">
+			Résumé du profil...
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templatePageClient.xhtml">
+	<ui:define name="titre">Compte : historique des commandes</ui:define>
+	<ui:define name="mainPage">
+		<div class="fil_ariane">
+			<ul class="breadcrumbs">
+				<li class="home"><h:outputLabel class="home_a"
+						value="Mon Profil" /><span>&#160; &gt; &#160;</span></li>
+				<li class="home"><h:outputLabel
+						value="Historique des commandes" /></li>
+			</ul>
+			<ul class="previous retour_profil">
+				<li><h:commandLink value="Retour au profil"
+						action="#{connectionMb.afficherProfil()}" /></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="tab_commande">
+		<h3 class="quick">Vos commandes</h3>
+			<h:panelGroup rendered="#{historiqueCommandeMb.commandes.size() != 0}">
+				<ui:repeat var="commande" value="#{historiqueCommandeMb.commandes}">
+					<table class="table table_couleur">
+						<tr>
+							<th>Commande effectué le
+								<div class="size_result">
+									<h:outputLabel value="#{commande.date}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputLabel>
+								</div>
+							</th>
+							<th>Total
+								<div class="size_result">
+									<h:outputLabel value="#{commande.total} €" />
+								</div>
+							</th>
+							<th>N° Commande
+								<div class="size_result">
+									<h:outputLabel value="#{commande.numero}" />
+								</div>
+							</th>
+							<th class="table_affiche_detail"><h:commandLink
+									value="Afficher les details"
+									action="#{historiqueCommandeMb.afficherDetailCommande(commande.id)}" />
+								| <h:commandLink value="Facture" /></th>
+						</tr>
+					</table>
+				</ui:repeat>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{historiqueCommandeMb.commandes.size() == 0}">
+				<h:outputLabel value="Pas de commande" />
+			</h:panelGroup>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

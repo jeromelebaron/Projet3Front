@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templatePageClient.xhtml">
+	<ui:define name="titre">Mon Compte</ui:define>
+	<ui:define name="mainPage">
+		<div class="fil_ariane">
+			<ul class="breadcrumbs">
+				<li class="home"><h:outputLabel value="Mon Profil"
+						action="#{connectionMb.afficherProfil()}" /></li>
+			</ul>
+			<ul class="previous retour_profil">
+				<li><h:commandLink value="Retour à l'accueil"
+						action="accueil.jsf" /></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="tab_commande">
+			<h3>Informations personnelles</h3>
+			<div class="pres_profil">
+				<div class="pres_l_profil">Nom :</div>
+				<div class="pres_r_profil">
+					<h:outputText class="input_co"
+						value="#{connectionMb.user.civilite.libelle} &#160;#{connectionMb.user.prenom} &#160;#{connectionMb.user.nom}" />
+				</div>
+			</div>
+			<div class="pres_profil">
+				<div class="pres_l_profil">Mail :</div>
+				<div class="pres_r_profil">
+					<h:outputText class="input_co" value="#{connectionMb.user.mail}" />
+				</div>
+			</div>
+			<div class="pres_profil">
+				<div class="pres_l_profil">Telephone :</div> 
+				<div class="pres_r_profil">
+					<h:outputText class="input_co"
+						value="#{connectionMb.user.telephone}" />
+				</div>
+			</div>
+			<div><h:commandButton class="btn_rose" value="Modifier" /></div>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

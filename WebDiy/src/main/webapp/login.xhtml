@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="titre">Identification</ui:define>
+	<ui:define name="mainPage">
+		<div class="fil_ariane">
+			<ul class="breadcrumbs">
+				<li class="home"><h:outputLabel class="home_a" value="Accueil" /><span>&#160;
+						&gt; &#160;</span></li>
+				<li class="home"><h:outputLabel class="home_a" value="Compte" /><span>&#160;
+						&gt; &#160;</span></li>
+				<li class="home"><h:outputLabel value="Connexion" /></li>
+			</ul>
+			<ul class="previous retour_profil">
+				<li><h:commandLink value="Retour à l'accueil"
+						action="accueil.jsf" /></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="account_grid tab_commande">
+			<div class="col-md-6 login-right">
+				<h3>Vous avez deja un compte ?</h3>
+				<p>Entrez vos identifiants pour vous connecter.</p>
+				<h:panelGroup layout="block" rendered="#{connectionMb.user == null}">
+					<span>Mail</span>
+					<h:inputText class="input_co" value="#{connectionMb.mail}" />
+					<br />
+					<span>Mot de passe</span>
+					<h:inputSecret class="input_co" value="#{connectionMb.mdp}" />
+					<br />
+					<h:commandButton value="Se Connecter"
+						action="#{connectionMb.seConnecter()}" />
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{connectionMb.user != null}">
+					<h:commandLink value="se deconnecter"
+						action="#{connectionMb.seDeconnecter()}" />
+				</h:panelGroup>
+			</div>
+			<div class="col-md-6 login-left">
+				<h3>Pas encore de compte ?</h3>
+				<p>En creant votre compte client/association, vous pourez vendre
+					vos produits, en acheter ou recevoir des dons de produits.</p>
+				<a class="acount-btn" href="register.jsf">Creer un compte</a>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

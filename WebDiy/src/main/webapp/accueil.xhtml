@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template/templateAccueil.xhtml">
+	<ui:define name="titre">Accueil</ui:define>
+	<ui:define name="mainPage">
+		<h3 class="m_1">Nos Derniers produits</h3>
+		<h:panelGroup rendered="#{catalogueMb.listProduits.size() != 0}">
+			<div class="content_grid">
+				<ui:repeat var="produit" value="#{catalogueMb.listProduits}">
+					<div class="col-md-4 simpleCart_shelfItem">
+						<h:commandLink value=""
+							action="#{detailProduitMb.afficherDetailProduit(produit.id)}">
+							<div class="inner_content clearfix">
+								<div class="product_image">
+									<img src="#{produit.images.get(0).url}" class="img-responsive" alt="Pas d'images" />
+									<h:commandLink value="" action="#{panierMb.ajoutAuPanier(produit.id)}"
+										class="button item_add item_1" />
+									<div class="product_container">
+										<div class="cart-left">
+											<h:outputLabel value="#{produit.libelle}" class="title" />
+										</div>
+										<span class="amount item_price"><h:outputLabel
+												value="#{produit.prix} €" /> </span>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+						</h:commandLink>
+					</div>
+				</ui:repeat>
+			</div>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{catalogueMb.listProduits.size() == 0}">
+			<div class="content_grid">
+				<div class="col-md-4 simpleCart_shelfItem">
+					<div class="inner_content clearfix">
+						<div class="product_image">
+							<div class="product_container">
+								<div class="cart-left">
+									<p class="title">
+										<h:outputLabel value="#{catalogueMb.message}" />
+									</p>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+</html>

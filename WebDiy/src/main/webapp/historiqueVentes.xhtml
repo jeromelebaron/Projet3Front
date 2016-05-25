@@ -1,0 +1,132 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templatePageClient.xhtml">
+	<ui:define name="mainPage">
+		<f:event listener="#{historiqueVenteMb.loadetat()}"
+			type="preRenderView" />
+		<div class="fil_ariane">
+			<ul class="breadcrumbs">
+				<li class="home"><h:outputLabel class="home_a"
+						value="Mon Profil" /><span>&#160; &gt; &#160;</span></li>
+				<li class="home"><h:outputLabel value="Historique des Ventes" /></li>
+			</ul>
+			<ul class="previous retour_profil">
+				<li><h:commandLink value="Retour au profil"
+						action="#{connectionMb.afficherProfil()}" /></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="tab_commande">
+			<h3 class="quick">Commandes Livrées</h3>
+			<h:panelGroup rendered="#{historiqueVenteMb.lcommande.size() != 0}">
+				<table class="table table_couleur">
+					<tr>
+						<th>Commande du</th>
+						<th>Total</th>
+						<th>N° Commande</th>
+						<th>Effectué par</th>
+						<th>Mail</th>
+					</tr>
+					<ui:repeat var="lg" value="#{historiqueVenteMb.lcommande}">
+						<tr class="table_color">
+							<td><div class="size_result">
+									<h:outputLabel value="#{lg.date}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputLabel>
+								</div></td>
+							<td><div class="size_result">
+									<h:outputLabel value="#{lg.total} €" />
+								</div></td>
+							<td><div class="size_result">
+									<h:outputLabel value="#{lg.numero}" />
+								</div></td>
+							<td><div class="size_result">
+									<h:outputLabel value="#{lg.client.civilite.libelle} &#160;#{lg.client.prenom} &#160;#{lg.client.nom}" />
+								</div></td>
+							<td><div class="size_result">
+									<h:outputLabel value="#{lg.client.mail}" />
+								</div></td>
+						</tr>
+					</ui:repeat>
+				</table>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{historiqueVenteMb.lcommande.size() == 0}">
+				<h:outputLabel value="Aucune commande livrée" />
+			</h:panelGroup>
+		</div>
+		<div class="tab_commande">
+			<h3 class="quick">Commande en préparation</h3>
+			<h:panelGroup
+				rendered="#{historiqueVenteMb.lventeEnCour.size() != 0}">
+				<table class="table table_color">
+					<tr>
+						<th>Commande du</th>
+						<th>Total</th>
+						<th>N° Commande</th>
+						<th>Effectué par</th>
+						<th>Mail</th>
+						<th>Adresse de livraison</th>
+						<th>Etat</th>
+						<th></th>
+					</tr>
+					<ui:repeat var="lv" value="#{historiqueVenteMb.lventeEnCour}">
+						<tr class="table_couleur">
+							<th><div class="size_result">
+									<h:outputLabel value="#{lv.date}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputLabel>
+								</div></th>
+							<th><div class="size_result">
+									<h:outputLabel value="#{lv.total} €" />
+								</div></th>
+							<th><div class="size_result">
+									<h:outputLabel value="#{lv.numero}" />
+								</div></th>
+							<th><div class="size_result">
+									<h:outputLabel
+										value="#{lv.client.civilite.libelle} &#160;#{lv.client.prenom} &#160;#{lv.client.nom}" />
+								</div></th>
+							<th><div class="size_result">
+									<h:outputLabel value="#{lv.client.mail}" />
+								</div></th>
+							<th><div class="size_result">
+									<h:outputLabel
+										value="#{lv.adresseLivraison.numero} &#160;#{lv.adresseLivraison.rue} &#160;#{lv.adresseLivraison.ville.cp} &#160;#{lv.adresseLivraison.ville.nom}" />
+								</div></th>
+							<th><div class="size_result">
+									<h:outputLabel value="#{lv.etat.libelle}" />
+								</div></th>
+							<th><h:commandLink value="Envoyer commande"
+									action="#{historiqueVenteMb.validerCommande(lv)}" /></th>
+						</tr>
+
+							<ui:repeat var="ldc" value="#{lv.lignesDeCommande}">
+								<tr>
+									<th><div class="image_tab">
+											<img src="#{ldc.produit.images.get(0).url}"
+												class="img-responsive" alt="images/notFound.jpeg" />
+										</div></th>
+									<th><div class="size_result">
+											<h:outputText value="#{ldc.produit.libelle}" />
+										</div></th>
+									<th><div class="size_result">
+											<h:outputText value="Prix : #{ldc.produit.prix}€" />
+										</div></th>
+									<th><div class="size_result">
+											<h:outputText value="Quantité : #{ldc.quantite}" />
+										</div></th>
+								</tr>
+							</ui:repeat>
+					</ui:repeat>
+				</table>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{historiqueVenteMb.lventeEnCour.size() == 0}">
+				<h:outputLabel value="Aucune commande à preparer" />
+			</h:panelGroup>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

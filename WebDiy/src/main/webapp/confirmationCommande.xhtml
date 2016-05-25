@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templateSansMenu.xhtml">
+	<ui:define name="titre">Récapitulatif</ui:define>
+	<ui:define name="mainPage">
+		<div class="check_box">
+			<div class="col-md-9 cart-items">
+				<div class="fil_ariane">
+					<ul class="breadcrumbs">
+						<li class="home"><h:outputLabel class="home_a"
+								value="Mon Panier" /><span>&#160; &gt; &#160;</span></li>
+						<li class="home"><h:outputLabel class="home_a"
+								value="Information de livraison" /><span>&#160; &gt;
+								&#160;</span></li>
+						<li class="home"><h:outputLabel class="home_a"
+								value="Paiement" /><span>&#160; &gt; &#160;</span></li>
+						<li class="home"><h:outputLabel value="Recapitulatif" /></li>
+					</ul>
+					<ul class="previous retour_profil">
+						<li><h:commandLink value="Retour à l'accueil"
+								action="accueil.jsf" /></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="tab_commande">
+					<h3 class="quick">Transaction</h3>
+					<label>Votre paiement a bien été pris en compte.</label>
+				</div>
+				<div class="tab_commande marge-bottom">
+					<h3 class="quick">Votre commande</h3>
+					La commande portant la référence <h:outputLabel
+							value="#{paiementMB.commandeDto.numero}" /> est bien enregistrée
+						et sera prise en charge par nos services.
+				</div>
+			</div>
+			<div class="col-md-3 cart-total">
+				<a class="continue" href="#">Total Commande</a>
+				<div class="price-details">
+					<h3>Details</h3>
+					<span>Total</span> <span class="total1"><h:outputLabel
+							value="#{commandeMb.montantPanier}" /></span> <span>Frais de
+						port</span> <span class="total1"><h:outputLabel
+							value="#{commandeMb.fraisLivraison}" /> </span>
+					<div class="clearfix"></div>
+				</div>
+				<ul class="total_price">
+					<li class="last_price">
+						<h4>TOTAL</h4>
+					</li>
+					<li class="last_price"><span><h:outputLabel
+								value="#{commandeMb.montantTotalCommande}€" /></span></li>
+					<div class="clearfix"></div>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

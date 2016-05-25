@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition>
+	<nav>
+		<div class="menu_box">
+			<h3 class="menu_head">Mon Compte</h3>
+			<ul class="nav">
+				<li><h:commandLink action="#{connectionMb.afficherProfil()}"
+						value="Mon profil" /></li>
+				<li><h:commandLink action="#{connectionMb.afficherProfil()}"
+						value="Mes produits" /></li>
+				<li><h:commandLink action="#{historiqueVenteMb.gererVente()}"
+						value="Vendre un produit" /></li>
+				<li><h:commandLink action="#{connectionMb.afficherProfil()}"
+						value="Faire un don" /></li>
+				<li><h:commandLink
+						action="#{historiqueVenteMb.produitEnVente()}"
+						value="Ventes en cours" /></li>
+				<li><h:commandLink
+						action="#{historiqueVenteMb.historiqueProduit()}"
+						value="Historique des ventes" /></li>
+				<li><h:commandLink
+						action="#{historiqueCommandeMb.afficherHistoriqueCommande()}"
+						value="Historique des commandes" /></li>
+				<li><h:commandLink action="#{connectionMb.afficherProfil()}"
+						value="Historique des dons" /></li>
+			</ul>
+		</div>
+	</nav>
+</ui:composition>
+</html>

@@ -1,0 +1,120 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templateSansMenu.xhtml">
+	<ui:define name="titre">Mon panier</ui:define>
+	<ui:define name="mainPage">
+		<div class="check_box">
+			<div class="col-md-9 cart-items">
+				<h1>
+					Mon Panier (
+					<h:outputLabel value="#{panierMb.totalProduits}" />
+					)
+				</h1>
+				<h:panelGroup rendered="#{panierMb.listLigneDeCommande.size() != 0}">
+					<ui:repeat var="ligne" value="#{panierMb.listLigneDeCommande}">
+						<script> 
+ 						$(document).ready(
+ 							function(c) {
+ 								$('.close1').on('click', 
+ 									function(c){
+ 										$('.cart-header').fadeOut('slow', 
+ 											function(c){
+ 												$('.cart-header').remove();
+											});
+									});
+							});
+			   			</script>
+						<div class="cart-header">
+							<h:commandButton
+								action="#{panierMb.supprProduit(ligne.produit.id)}" value=""
+								styleClass="close1" />
+							<div class="cart-sec simpleCart_shelfItem">
+								<div class="cart-item cyc">
+									<img src="#{ligne.produit.images.get(0).url}"
+										class="img-responsive" alt="" />
+								</div>
+								<div class="cart-item-info">
+									<h3>
+										<h:commandLink value="#{ligne.produit.libelle}"
+											class="titrePanier" />
+										<span>Reference : <h:outputLabel
+												value="#{ligne.produit.reference}" /></span>
+									</h3>
+									<ul class="qty">
+										<li><p>
+												Quantité :
+												<h:commandButton class="btnCrement" value="-"
+													action="#{panierMb.decrementeQteProduit(ligne.produit.id)}" />
+												<h:outputLabel id="output" value="#{ligne.quantite}" />
+												<h:commandButton class="btnCrement" value="+"
+													action="#{panierMb.incrementeQteProduit(ligne.produit.id)}" />
+											</p></li>
+										<li><p>
+												Prix :
+												<h:outputLabel value="#{ligne.produit.prix} €" />
+											</p></li>
+										<li>
+											<p>
+												<h:panelGroup
+													rendered="#{commandeMb.mapLigneCommandeStockInsuffisant.get(ligne.produit.id) != null}">
+													<b>Stock insuffisant, il ne reste que <h:outputText
+															value="#{commandeMb.mapLigneCommandeStockInsuffisant.get(ligne.produit.id)}" />
+														article(s).
+													</b>
+												</h:panelGroup>
+											</p>
+										</li>
+									</ul>
+									<div class="delivery">
+										<span>Total : <h:outputLabel
+												value="#{panierMb.mapLigneCmd.get(ligne)} €" /></span>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+
+							</div>
+						</div>
+					</ui:repeat>
+				</h:panelGroup>
+			</div>
+			<div class="col-md-3 cart-total">
+				<a class="continue" href="accueil.jsf">Continuer mes achats</a>
+				<div class="price-details">
+					<h3>Details</h3>
+					<span>Total</span> <span class="total1"><h:outputLabel
+							value="#{panierMb.totalPanier}" /></span> <span>Frais de port
+						estimés</span> <span class="total1"><h:outputLabel value="5.5" />
+					</span>
+					<div class="clearfix"></div>
+				</div>
+				<ul class="total_price">
+					<li class="last_price">
+						<h4>TOTAL</h4>
+					</li>
+					<li class="last_price"><span><h:outputLabel
+								value="#{panierMb.panierFraisLivraison}€" /></span></li>
+					<div class="clearfix"></div>
+				</ul>
+				<div class="total-item">
+					<h3>OPTIONS</h3>
+					<h4>COUPONS</h4>
+					<h:inputText value="#{panierMb.coupon}" class="coupon" />
+					<div>
+						<a class="btn_rose" href="#">Appliquer</a>
+					</div>
+					<p>
+						<a href="login.jsf">Connexion</a> pour utiliser un coupon
+					</p>
+				</div>
+				<div class="clearfix"></div>
+				<h:commandLink styleClass="order" value="Valider la commande"
+					action="#{commandeMb.commander()}" />
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

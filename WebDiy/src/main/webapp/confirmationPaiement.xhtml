@@ -1,0 +1,117 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templateSansMenu.xhtml">
+	<ui:define name="titre">Validation paiement</ui:define>
+	<ui:define name="mainPage">
+		<div class="check_box">
+			<div class="col-md-9 cart-items">
+				<div class="fil_ariane">
+					<ul class="breadcrumbs">
+						<li class="home"><h:outputLabel class="home_a"
+								value="Mon Panier" /><span>&#160; &gt; &#160;</span></li>
+						<li class="home"><h:outputLabel class="home_a"
+								value="Information de livraison" /><span>&#160; &gt;
+								&#160;</span></li>
+						<li class="home"><h:outputLabel value="Paiement" /></li>
+					</ul>
+					<ul class="previous retour_profil">
+						<li><h:commandLink value="Retour à l'accueil"
+								action="accueil.jsf" /></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="tab_commande">
+					<div class="choix_paiment">
+						<h3 class="quick_output">Type de paiement</h3>
+						<div>
+							<div class="row center-enfants">
+								<ui:repeat var="cb" value="#{commandeMb.typesCb}">
+									<h:outputLabel value="#{cb.libelle}"
+										styleClass="col-md-3 center-enfants" />
+								</ui:repeat>
+							</div>
+							<div class="row center-enfants">
+								<ui:repeat var="cb" value="#{commandeMb.typesCb}">
+                                    <input type="radio" name="carte" class="col-md-3"/>
+                                </ui:repeat>
+							</div>
+							<div class="row align-vertical" id="images-cartes">
+								<ui:repeat var="image" value="#{commandeMb.typesCb}">
+									<div class="col-md-3 center-enfants">
+										<img src="#{image.url}" alt="images/maestro.gif"
+											class="img_pad" />
+									</div>
+								</ui:repeat>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="quick_desc">
+							<fieldset>
+								<legend>Cartes de paiement</legend>
+								<div>
+									<img src="images/payment.png" class="img-responsive" alt="" />
+									<span>DIY Decor Home accepte la plupart des cartes de
+										crédit et de débit</span>
+								</div>
+								<legend> </legend>
+								<legend>Données carte bancaire</legend>
+								<div class="row">
+									<div class="col-md-6">
+										<h:outputLabel value="Nom du titulaire" class="text_align_add" />
+										<h:inputText value="#{paiementMB.nomTitulaire}" />
+									</div>
+									<div class="col-md-6">
+										<h:outputLabel value="Numéro" class="text_align_add" />
+										<h:inputText value="#{paiementMB.carteDto.numeroCarte}" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<h:outputLabel value="Date d'expiration"
+											class="text_align_add" />
+										<input type="text" />
+									</div>
+									<div class="col-md-6">
+										<h:outputLabel value="Cryptogramme visuel"
+											class="text_align_add" />
+										<h:inputText value="#{paiementMB.carteDto.cryptogramme}" />
+									</div>
+								</div>
+							</fieldset>
+							<div class="row">
+								<h:outputLabel value="#{paiementMB.messageErreurPaiement}" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 cart-total">
+				<a class="continue" href="#">Continuer mes achats</a>
+				<div class="price-details">
+					<h3>Details</h3>
+					<span>Total</span> <span class="total1"><h:outputLabel
+							value="#{commandeMb.montantPanier}" /></span> <span>Frais de
+						port</span> <span class="total1"><h:outputLabel
+							value="#{commandeMb.fraisLivraison}" /> </span>
+					<div class="clearfix"></div>
+				</div>
+				<ul class="total_price">
+					<li class="last_price">
+						<h4>TOTAL</h4>
+					</li>
+					<li class="last_price"><span><h:outputLabel
+								value="#{commandeMb.montantTotalCommande}€" /></span></li>
+					<div class="clearfix"></div>
+				</ul>
+				<div class="clearfix"></div>
+				<h:commandLink styleClass="order" value="Payer la commande"
+					action="#{paiementMB.payer()}" />
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

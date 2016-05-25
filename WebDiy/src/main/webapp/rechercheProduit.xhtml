@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="titre">A Propos</ui:define>
+	<ui:define name="mainPage">
+		<div class="dreamcrub">
+			<ul class="breadcrumbs">
+				<li class="home"><a href="accueil.jsf" title="Go to Home Page">Accueil</a>
+					<span>&gt;</span></li>
+				<li class="home">Recherche Produit
+				</li>
+			</ul>
+			<ul class="previous">
+				<li><a href="accueil.jsf">Retour à la page precedente</a></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="mens-toolbar">
+			<div class="sort">
+				<div class="sort-by">
+					<label>Trié par</label> <select>
+						<option value="">Position</option>
+						<option value="">Nom</option>
+						<option value="">Prix</option>
+					</select> <a href=""><img src="images/arrow2.gif" alt=""
+						class="v-middle" /></a>
+				</div>
+			</div>
+<!-- 			<ul class="women_pagenation dc_paginationA dc_paginationA06"> -->
+<!-- 				<li><a href="#" class="previous">Page:</a></li> -->
+<!-- 				<li class="active"><a href="#">1</a></li> -->
+<!-- 				<li><a href="#">2</a></li> -->
+<!-- 			</ul> -->
+			<div class="clearfix"></div>
+		</div>
+		<div id="cbp-vm" class="cbp-vm-switcher cbp-vm-view-grid">
+			<div class="cbp-vm-options">
+				<a href="#" class="cbp-vm-icon cbp-vm-grid cbp-vm-selected"
+					data-view="cbp-vm-view-grid" title="grid">Vue en grille</a> <a
+					href="#" class="cbp-vm-icon cbp-vm-list"
+					data-view="cbp-vm-view-list" title="list">Vue en liste</a>
+			</div>
+			<!-- 			<div class="pages"> -->
+			<!-- 				<div class="limiter visible-desktop"> -->
+			<!-- 					<label>Show</label> <select> -->
+			<!-- 						<option value="" selected="selected">9</option> -->
+			<!-- 						<option value="">15</option> -->
+			<!-- 						<option value="">30</option> -->
+			<!-- 					</select> per page -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
+			<div class="clearfix"></div>
+			<ul>
+				<h:panelGroup
+					rendered="#{rechercheProduitMb.listProduits.size() != 0}">
+					<ui:repeat var="produit" value="#{rechercheProduitMb.listProduits}">
+						<li class="simpleCart_shelfItem"><h:commandLink
+								action="#{detailProduitMb.afficherDetailProduit(produit.id)}"
+								class="cbp-vm-image">
+								<div class="inner_content clearfix">
+									<div class="product_image">
+										<img src="#{produit.images.get(0).url}" class="img-responsive"
+											alt="images/notFound.jpeg" />
+										<div class="product_container">
+											<div class="cart-left">
+												<h:outputLabel value="#{produit.libelle}" class="title" />
+											</div>
+											<div class="mount item_price price">
+												<h:outputLabel value="#{produit.prix} €" />
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+							</h:commandLink>
+							<div class="cbp-vm-details">
+								<h:outputText
+									value="#{produit.description.subSequence(0, 200)} ......" />
+							</div>
+							<h:commandLink class="button item_add cbp-vm-icon cbp-vm-add" value="Ajouter
+								au panier" action="#{panierMb.ajoutAuPanier(produit.id)}" />
+							</li>
+					</ui:repeat>
+				</h:panelGroup>
+				<h:panelGroup
+					rendered="#{rechercheProduitMb.listProduits.size() == 0}">
+					<div class="inner_content clearfix">
+						<div class="product_image">
+							<img src="images/notFound.jpg" class="img-responsive" />
+							<div class="product_container">
+								<div class="cart-left">
+									<h:outputLabel value="Pas de produit" class="title" />
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</h:panelGroup>
+			</ul>
+		</div>
+		<script src="js/cbpViewModeSwitch.js" type="text/javascript"></script>
+		<script src="js/classie.js" type="text/javascript"></script>
+	</ui:define>
+</ui:composition>
+</html>

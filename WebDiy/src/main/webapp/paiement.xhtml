@@ -1,0 +1,206 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templateSansMenu.xhtml">
+	<ui:define name="titre">Livraison</ui:define>
+	<ui:define name="mainPage">
+		<div class="check_box">
+			<div class="col-md-9 cart-items">
+				<div class="fil_ariane">
+					<ul class="breadcrumbs">
+						<li class="home"><h:outputLabel class="home_a"
+								value="Mon Panier" /><span>&#160; &gt; &#160;</span></li>
+						<li class="home"><h:outputLabel
+								value="Information de livraison" /></li>
+					</ul>
+					<ul class="previous retour_profil">
+						<li><h:commandLink value="Retour à l'accueil"
+								action="accueil.jsf" /></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="tab_commande">
+					<h3 class="quick">Récapitulatif de la commande</h3>
+					<h:panelGroup
+						rendered="#{panierMb.listLigneDeCommande.size() != 0}">
+						<table class="table table_col">
+							<ui:repeat var="ligne" value="#{panierMb.listLigneDeCommande}">
+								<tr>
+									<th><div class="image_tab">
+											<img src="#{ligne.produit.images.get(0).url}"
+												class="img-responsive" />
+										</div></th>
+									<th>
+										<div class="size_result_paiement">
+											<h:outputLabel value="#{ligne.produit.libelle}" />
+										</div> Réference
+										<div class="size_result_paiement">
+											<h:outputLabel value="#{ligne.produit.reference}" />
+										</div>
+									</th>
+									<th>Prix
+										<div class="size_result_paiement">
+											<h:outputLabel value="#{ligne.produit.prix} €" />
+										</div>
+									</th>
+									<th>Quantité
+										<div class="size_result_paiement">
+											<h:outputLabel value="#{ligne.quantite}" />
+										</div>
+									</th>
+									<th>
+										<div class="total_paiement">
+											<span>Total : <h:outputLabel
+													value="#{panierMb.mapLigneCmd.get(ligne)} €" /></span>
+											<div class="clearfix"></div>
+										</div>
+									</th>
+								</tr>
+							</ui:repeat>
+						</table>
+					</h:panelGroup>
+				</div>
+				<div class="moyen_panier">
+					<div class="choix_paiment">
+						<h3 class="quick_output">Méthode de livraison</h3>
+						<div class="espace_radio">
+							<h:selectOneRadio value="#{commandeMb.methodeLivraisonChoisi}">
+								<f:selectItems value="#{commandeMb.methodesLivraison}" var="m"
+									itemLabel="#{m.libelle} (#{m.prix}€)" itemValue="#{m.id}" />
+								<f:ajax event="click" render="panneauMontant"
+									listener="#{commandeMb.mettreAJourRecapitulatifCommande()}" />
+							</h:selectOneRadio>
+						</div>
+					</div>
+					<div class="choix_paiment">
+						<h3 class="quick_output">Adresses</h3>
+						<div class="row address_div">
+							<div class="col-md-6 add_div">
+								<div class="quick_add_livraison">
+									<span>Livraison</span>
+									<div>
+										<h:selectOneMenu value="#{clientMb.adresseLivraisonChoisie}">
+											<f:selectItems value="#{clientMb.adressesLivraison}"
+												var="adresse" itemLabel="#{adresse.libelle}"
+												itemValue="#{adresse.id}" />
+										</h:selectOneMenu>
+										<button class="btn_add">Ajouter</button>
+										<h:commandButton value="Supprimer"
+											action="#{clientMb.supprimerAdresseL()}" class="btn_add" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 add_div">
+								<div class="quick_desc">
+									Facturation
+									<div>
+										<h:selectOneMenu value="#{clientMb.adresseFacturationChoisie}">
+											<f:selectItems value="#{clientMb.adressesFacturation}"
+												var="adresse" itemLabel="#{adresse.libelle}"
+												itemValue="#{adresse.id}" />
+										</h:selectOneMenu>
+										<button class="btn_add">Ajouter</button>
+										<h:commandButton value="Supprimer"
+											action="#{clientMb.supprimerAdresseF()}" class="btn_add" />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="row">
+								<h3 class="quick_output">Services de livraison disponible
+									pour cette adresse</h3>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<label>Nom</label>
+								</div>
+								<div class="col-md-3">
+									<label>Type de livraison</label>
+								</div>
+								<div class="col-md-5">
+									<label>Adresse</label>
+								</div>
+								<div class="col-md-2 center-enfants">
+									<label>Choisir</label>
+								</div>
+							</div>
+							<ui:repeat var="serviceLivraison"
+								value="#{commandeMb.lesServicesDeLivraison}">
+								<div class="row">
+									<div class="col-md-2">
+										<h:outputText value="#{serviceLivraison.nom}" />
+									</div>
+									<div class="col-md-3">
+										<h:outputText
+											value="#{serviceLivraison.typeLivraison.libelle}" />
+									</div>
+									<div class="col-md-5">
+										<h:outputText
+											value="#{serviceLivraison.adresseLocalisation.numero}" />
+										&#160;
+										<h:outputText
+											value="#{serviceLivraison.adresseLocalisation.nomRue}" />
+										&#160;
+										<h:outputText
+											value="#{serviceLivraison.adresseLocalisation.ville.nom}" />
+										&#160;
+										<h:outputText
+											value="#{serviceLivraison.adresseLocalisation.ville.codePostal}" />
+									</div>
+									<div class="col-md-2 center-enfants">
+										<input type="radio" name="choixLivraison" />
+									</div>
+								</div>
+							</ui:repeat>
+						</div>
+						<div id="google-map">
+						<iframe
+							src="https://www.google.com/maps/d/embed?mid=1CoByS1VRqiALAYdkjTKBOlpQL7c"
+							width="750" height="400"></iframe>
+							</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 cart-total">
+				<a class="continue" href="#">Continuer mes achats</a>
+				<h:panelGroup id="panneauMontant">
+					<div class="price-details">
+						<h3>Details</h3>
+						<span>Total</span> <span class="total1"><h:outputLabel
+								value="#{commandeMb.montantPanier}" /></span> <span>Frais de
+							port</span> <span class="total1"><h:outputLabel
+								value="#{commandeMb.fraisLivraison}" /> </span>
+						<div class="clearfix"></div>
+					</div>
+					<ul class="total_price">
+						<li class="last_price">
+							<h4>TOTAL</h4>
+						</li>
+						<li class="last_price"><span><h:outputLabel
+									value="#{commandeMb.montantTotalCommande}€" /></span></li>
+						<div class="clearfix"></div>
+					</ul>
+					<div class="clearfix"></div>
+				</h:panelGroup>
+				<h:commandLink styleClass="order" value="Payer la commande"
+					action="#{commandeMb.allerPayer()}" />
+				<div class="total-item">
+					<h3>OPTIONS</h3>
+					<h4>COUPONS</h4>
+					<h:inputText value="#{panierMb.coupon}" />
+					<div>
+						<a class="btn_rose" href="#">Appliquer</a>
+					</div>
+					<p>
+						<a href="login.jsf">Connexion</a> pour utiliser le coupons
+					</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

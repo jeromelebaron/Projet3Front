@@ -1,0 +1,244 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templatePageClient.xhtml">
+	<ui:define name="titre">Compte : historique des commandes</ui:define>
+	<ui:define name="mainPage">
+		<div class="fil_ariane">
+			<ul class="breadcrumbs">
+				<li class="home"><h:outputLabel class="home_a"
+						value="Mon Profil" /><span>&#160; &gt; &#160;</span></li>
+				<li class="home"><h:outputLabel class="home_a"
+						value="Historique des commandes" /><span>&#160; &gt;
+						&#160;</span></li>
+				<li class="home"><h:outputLabel value="Détail de la commande" /></li>
+
+			</ul>
+			<ul class="previous retour_profil">
+				<li><h:commandLink value="Retour à l'historique des commandes"
+						action="#{historiqueCommandeMb.afficherHistoriqueCommande()}" /></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="tab_commande">
+			<h:panelGroup
+				rendered="#{historiqueCommandeMb.commandeDetails.size() == 1}">
+				<table class="table table_couleur">
+					<ui:repeat var="commande"
+						value="#{historiqueCommandeMb.commandeDetails}">
+						<tr>
+							<th>Commande effectuée le
+								<div class="size_result">
+									<h:outputLabel value="#{commande.date}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputLabel>
+								</div> vendue par <h:panelGroup
+									rendered="#{commande.lignesDeCommande.get(0).produit.vendeur.id != null}">
+									<h:outputLabel
+										value="#{commande.lignesDeCommande.get(0).produit.vendeur.nom}" />
+								</h:panelGroup> <h:panelGroup
+									rendered="#{commande.lignesDeCommande.get(0).produit.vendeur.id == null}">
+									<h:outputLabel value="DDH" />
+								</h:panelGroup>
+							</th>
+							<th>Total
+								<div class="size_result">
+									<h:outputLabel value="#{commande.total} €" />
+								</div>
+							</th>
+							<th>Etat
+								<div class="size_result">
+									<h:outputLabel value="#{commande.etat.libelle}" />
+								</div>
+							</th>
+							<th>N° Commande
+								<div class="size_result">
+									<h:outputLabel value="#{commande.numero}" />
+								</div>
+							</th>
+							<h:panelGroup
+								rendered="#{commande.lignesDeCommande.get(0).produit.vendeur.id != null}">
+								<th class="table_affiche_detail"><h:commandLink
+										value="Evaluer le vendeur"
+										action="#{evaluationMb.versNoteVendeur(commande.lignesDeCommande.get(0).produit.id)}" />
+								</th>
+							</h:panelGroup>
+						</tr>
+					</ui:repeat>
+					<table class="table table_col">
+						<ui:repeat var="ldc"
+							value="#{historiqueCommandeMb.lignesDeCommande}">
+							<tr>
+								<th><div class="image_tab">
+										<img src="#{ldc.produit.images.get(0).url}"
+											class="img-responsive" alt="images/notFound.jpeg" />
+									</div></th>
+								<th>
+									<div class="size_result">
+										<h:outputLabel value="#{ldc.produit.libelle}" />
+									</div> Référence
+									<div class="size_result">
+										<h:outputLabel value="#{ldc.produit.reference}" />
+									</div>
+								</th>
+								<th>Prix
+									<div class="size_result">
+										<h:outputLabel value="#{ldc.produit.prix} €" />
+									</div>
+								</th>
+								<th>Quantité
+									<div class="size_result">
+										<h:outputLabel value="#{ldc.quantite}" />
+									</div>
+								</th>
+								<th><h:panelGroup
+										rendered="#{ldc.produit.notes.size() != 0}">
+										<ui:repeat var="note" value="#{ldc.produit.notes}">
+											<h:panelGroup
+												rendered="#{note.noteur.id == historiqueCommandeMb.client.id}">
+															Note
+																<div class="size_result">
+													<h:outputLabel value="#{note.note}" />
+												</div>
+											</h:panelGroup>
+										</ui:repeat>
+										<h:panelGroup
+											rendered="#{!historiqueCommandeMb.verifNoteProduit(ldc.produit.notes)}">
+											<h:commandLink value="Evaluer le produit"
+												action="#{evaluationMb.versNoteProduit(ldc.produit.id)}" />
+										</h:panelGroup>
+									</h:panelGroup> <h:panelGroup rendered="#{ldc.produit.notes.size() == 0}">
+										<h:commandLink value="Evaluer le produit"
+											action="#{evaluationMb.versNoteProduit(ldc.produit.id)}" />
+									</h:panelGroup></th>
+							</tr>
+						</ui:repeat>
+					</table>
+				</table>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{historiqueCommandeMb.commandeDetails.size() > 1}">
+				<table class="table table_couleur">
+					<tr>
+						<th>Commande effectuée le
+							<div class="size_result">
+								<h:outputLabel
+									value="#{historiqueCommandeMb.commandeDetails.get(0).date}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputLabel>
+							</div>
+						</th>
+						<th>Total
+							<div class="size_result">
+								<h:outputLabel
+									value="#{historiqueCommandeMb.commandeDetails.get(0).total} €" />
+							</div>
+						</th>
+						<th>N° Commande
+							<div class="size_result">
+								<h:outputLabel
+									value="#{historiqueCommandeMb.commandeDetails.get(0).numero}" />
+							</div>
+						</th>
+					</tr>
+					<ui:repeat var="commande"
+						value="#{historiqueCommandeMb.commandeDetails}">
+						<h:panelGroup
+							rendered="#{historiqueCommandeMb.commandeDetails.get(0).id != commande.id}">
+							<table class="table table_color">
+								<tr>
+									<th>Sous cmd vendue par
+										<div class="size_result">
+											<h:panelGroup
+												rendered="#{commande.lignesDeCommande.get(0).produit.vendeur.id != null}">
+												<h:outputLabel
+													value="#{commande.lignesDeCommande.get(0).produit.vendeur.nom}" />
+											</h:panelGroup>
+											<h:panelGroup
+												rendered="#{commande.lignesDeCommande.get(0).produit.vendeur.id == null}">
+												<h:outputLabel value="DDH" />
+											</h:panelGroup>
+										</div>
+									</th>
+									<th>Total
+										<div class="size_result">
+											<h:outputLabel value="#{commande.total} €" />
+										</div>
+									</th>
+									<th>Etat
+										<div class="size_result">
+											<h:outputLabel value="#{commande.etat.libelle}" />
+										</div>
+									</th>
+									<th>N° Commande
+										<div class="size_result">
+											<h:outputLabel value="#{commande.numero}" />
+										</div>
+									</th>
+									<th class="table_affiche_detail"><h:commandLink
+											value="Evaluer le vendeur"
+											action="#{evaluationMb.versNoteVendeur(commande.lignesDeCommande.get(0).produit.id)}" />
+									</th>
+								</tr>
+								<table class="table table_col">
+									<ui:repeat var="ldc"
+										value="#{historiqueCommandeMb.lignesDeCommande}">
+										<h:panelGroup rendered="#{commande.id == ldc.commande.id}">
+											<tr>
+												<th><div class="image_tab">
+														<img src="#{ldc.produit.images.get(0).url}"
+															class="img-responsive" alt="images/notFound.jpeg" />
+													</div></th>
+												<th>
+													<div class="size_result">
+														<h:outputLabel value="#{ldc.produit.libelle}" />
+													</div> Référence
+													<div class="size_result">
+														<h:outputLabel value="#{ldc.produit.reference}" />
+													</div>
+												</th>
+												<th>Prix
+													<div class="size_result">
+														<h:outputLabel value="#{ldc.produit.prix} €" />
+													</div>
+												</th>
+												<th>Quantité
+													<div class="size_result">
+														<h:outputLabel value="#{ldc.quantite}" />
+													</div>
+												</th>
+												<th><h:panelGroup
+														rendered="#{ldc.produit.notes.size() != 0}">
+														<ui:repeat var="note" value="#{ldc.produit.notes}">
+															<h:panelGroup
+																rendered="#{note.noteur.id == historiqueCommandeMb.client.id}">
+															Note
+																<div class="size_result">
+																	<h:outputLabel value="#{note.note}" />
+																</div>
+															</h:panelGroup>
+														</ui:repeat>
+														<h:panelGroup
+															rendered="#{!historiqueCommandeMb.verifNoteProduit(ldc.produit.notes)}">
+															<h:commandLink value="Evaluer le produit"
+																action="#{evaluationMb.versNoteProduit(ldc.produit.id)}" />
+														</h:panelGroup>
+													</h:panelGroup> <h:panelGroup rendered="#{ldc.produit.notes.size() == 0}">
+														<h:commandLink value="Evaluer le produit"
+															action="#{evaluationMb.versNoteProduit(ldc.produit.id)}" />
+													</h:panelGroup></th>
+											</tr>
+										</h:panelGroup>
+									</ui:repeat>
+								</table>
+							</table>
+						</h:panelGroup>
+					</ui:repeat>
+				</table>
+			</h:panelGroup>
+			<div class="clearfix"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

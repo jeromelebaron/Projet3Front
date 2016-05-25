@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition
+	template="/WEB-INF/template/templatePageModerateur.xhtml">
+	<ui:define name="titre">Mon Compte</ui:define>
+	<ui:define name="mainPage">
+		<div class="fil_ariane">
+			<ul class="breadcrumbs">
+				<li class="home"><h:outputLabel value="Administration"
+						action="#{connectionMb.afficherProfil()}" /></li>
+			</ul>
+			<ul class="previous retour_profil">
+				<li><h:commandLink value="Retour à l'accueil"
+						action="accueil.jsf" /></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="tab_commande">
+			<h3>Taches à realiser</h3>
+		</div>
+		
+	</ui:define>
+</ui:composition>
+</html>

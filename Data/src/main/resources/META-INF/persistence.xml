@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="Data">
+		<jta-data-source>java:jboss/s2reDS</jta-data-source>
+		<class>fr.s2re.entity.Ville</class>
+		<class>fr.s2re.entity.Administrateur</class>
+		<class>fr.s2re.entity.Adresse</class>
+		<class>fr.s2re.entity.Alerte</class>
+		<class>fr.s2re.entity.AlerteCommentaire</class>
+		<class>fr.s2re.entity.AlerteMessage</class>
+		<class>fr.s2re.entity.AlerteProduit</class>
+		<class>fr.s2re.entity.Association</class>
+		<class>fr.s2re.entity.CartePaiement</class>
+		<class>fr.s2re.entity.Categorie</class>
+		<class>fr.s2re.entity.Client</class>
+		<class>fr.s2re.entity.Civilite</class>
+		<class>fr.s2re.entity.CodeReduction</class>
+		<class>fr.s2re.entity.Commande</class>
+		<class>fr.s2re.entity.Couleur</class>
+		<class>fr.s2re.entity.Don</class>
+		<class>fr.s2re.entity.Envie</class>
+		<class>fr.s2re.entity.EtatCommande</class>
+		<class>fr.s2re.entity.EtatProduit</class>
+		<class>fr.s2re.entity.Gerant</class>
+		<class>fr.s2re.entity.Image</class>
+		<class>fr.s2re.entity.LigneDeCommande</class>
+		<class>fr.s2re.entity.Marque</class>
+		<class>fr.s2re.entity.Message</class>
+		<class>fr.s2re.entity.MessageForum</class>
+		<class>fr.s2re.entity.MessageInbox</class>
+		<class>fr.s2re.entity.Messagerie</class>
+		<class>fr.s2re.entity.MethodeLivraison</class>
+		<class>fr.s2re.entity.Moderateur</class>
+		<class>fr.s2re.entity.Note</class>
+		<class>fr.s2re.entity.NoteClient</class>
+		<class>fr.s2re.entity.NoteProduit</class>
+		<class>fr.s2re.entity.ObjetAlerte</class>
+		<class>fr.s2re.entity.Produit</class>
+		<class>fr.s2re.entity.ProduitCodeReduction</class>
+		<class>fr.s2re.entity.Retour</class>
+		<class>fr.s2re.entity.Rib</class>
+		<class>fr.s2re.entity.Rubrique</class>
+		<class>fr.s2re.entity.Sujet</class>
+		<class>fr.s2re.entity.TypeCB</class>
+		<class>fr.s2re.entity.TypeReduction</class>
+		<class>fr.s2re.entity.TypeRetour</class>
+		<class>fr.s2re.entity.TypeSujet</class>
+		<class>fr.s2re.entity.Utilisateur</class>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>WebDiy</artifactId>
+	<packaging>war</packaging>
+
+	<parent>
+		<groupId>fr.s2re</groupId>
+		<artifactId>Parent</artifactId>
+		<version>0.1</version>
+		<relativePath>../Parent/pom.xml</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>fr.s2re</groupId>
+			<artifactId>ApiUc</artifactId>
+			<version>0.1</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>fr.s2re</groupId>
+			<artifactId>Uc</artifactId>
+			<version>0.1</version>
+			<type>jar</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<includeInApplicationXml>true</includeInApplicationXml>
+					<archive>
+						<manifestEntries>
+							<Dependencies>org.apache.xerces, org.dom4j</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>WebDiy</finalName>
+	</build>
+
+</project>

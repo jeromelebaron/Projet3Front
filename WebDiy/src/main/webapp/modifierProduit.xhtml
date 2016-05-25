@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:body>
+
+				
+				<div>
+				<h:inputText value="Nom" /> <h:inputText value="#{historiqueVenteMb.p.libelle}" /></div>
+				<div>
+				<h:inputText value="Référence" /><h:selectOneMenu value="#{historiqueVenteMb.p.reference}">
+				<f:selectItems value="#{historiqueVenteMb.produits}"
+					itemValue="#{a.reference}" var="a" itemLabel="#{a.reference}" />
+			</h:selectOneMenu></div>
+			<div>
+				<h:inputText value="Quantité" /><h:inputText value="#{historiqueVenteMb.p.quantite}" /></div>
+				<div>
+				<h:inputText value="Prix" /><h:inputText value="#{historiqueVenteMb.p.prix}" /></div>
+				<div>
+				<h:inputText value="Décription" /><h:inputText value="#{historiqueVenteMb.p.description}" /></div>
+				<div>
+				<h:inputText value="Couleur" /><h:selectOneMenu value="#{historiqueVenteMb.p.couleur.id}">
+				<f:selectItems value="#{historiqueVenteMb.produits}"
+					itemValue="#{a.couleur.id}" var="a" itemLabel="#{a.couleur.libelle }" />
+			</h:selectOneMenu>
+				
+					</div>
+			
+		
+	</h:body>
+</html>

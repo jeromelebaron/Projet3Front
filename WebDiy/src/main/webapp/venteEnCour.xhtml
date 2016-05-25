@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+<ui:composition template="/WEB-INF/template/templatePageClient.xhtml">
+	<ui:define name="mainPage">
+		<f:event listener="#{historiqueVenteMb.loadSupprime()}"
+		type="preRenderView" />
+		<div class="fil_ariane">
+			<ul class="breadcrumbs">
+				<li class="home"><h:outputLabel class="home_a"
+						value="Mon Profil" /><span>&#160; &gt; &#160;</span></li>
+				<li class="home"><h:outputLabel value="Mes produits en vente" /></li>
+			</ul>
+			<ul class="previous retour_profil">
+				<li><h:commandLink value="Retour au profil"
+						action="#{connectionMb.afficherProfil()}" /></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="tab_commande">
+			<h3 class="quick">Ventes en cours</h3>
+			<table class="table table_col">
+				<ui:repeat var="p" value="#{historiqueVenteMb.produits}">
+					<tr>
+						<th><div class="image_tab">
+								<img src="#{p.images.get(0).url}" class="img-responsive"
+									alt="images/notFound.jpeg" />
+							</div></th>
+						<th>
+							<div class="size_result">
+								<h:outputLabel value="#{p.libelle}" />
+							</div> Référence
+							<div class="size_result">
+								<h:outputLabel value="#{p.reference}" />
+							</div>
+						</th>
+						<th>Prix
+							<div class="size_result">
+								<h:outputLabel value="#{p.prix} €" />
+							</div>
+						</th>
+						<th>Quantité
+							<div class="size_result">
+								<h:outputLabel value="#{p.quantite}" />
+							</div> <h:commandLink value="Supprimer"
+								action="#{historiqueVenteMb.supprimerProduit(p)}" />
+						</th>
+						<th><div class="table_modif_pdt">
+								<h:commandLink action="#{historiqueVenteMb.modifierProduit(p)}"
+									value="Modifier le produit"
+									onclick="window.open('modifierProduit.xhtml', 'nom de ta fenêtre', 'height=100, width=400, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no'); return(false);" />
+							</div></th>
+					</tr>
+				</ui:repeat>
+			</table>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

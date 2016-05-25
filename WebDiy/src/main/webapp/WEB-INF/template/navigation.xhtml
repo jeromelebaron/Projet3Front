@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition>
+	<nav>
+		<div class="menu_box">
+			<h3 class="menu_head">Categories</h3>
+			<ul class="nav">
+				<h:panelGroup rendered="#{menuMb.listCategoriesMere != null}">
+					<ui:repeat var="categorieMere" value="#{menuMb.listCategoriesMere}">
+						<li><h:commandLink value="#{categorieMere.libelle}"
+								action="#{rechercheProduitMb.rechercheProduitByCat(categorieMere.id)}"
+								id="cat_mere" title="#{categorieMere.id}" /></li>
+						<h:panelGroup rendered="#{categorieMere.categories != null}">
+							<div class="navig sous_cat-#{categorieMere.id}" id="sous_cat" title="#{categorieMere.id}"
+								hidden="false">
+								<ul class="nav">
+									<ui:repeat var="sousCat" value="#{categorieMere.categories}">
+										<li><h:commandLink value="#{sousCat.libelle}"
+												action="#{rechercheProduitMb.rechercheProduitByCat(sousCat.id)}"
+												id="sous_cat_mere" title="#{sousCat.id}" /></li>
+										<h:panelGroup rendered="#{sousCat.categories != null}">
+											<div class="navig sous_sous_cat-#{sousCat.id}"
+												id="sous_sous_cat" title="#{sousCat.id}" hidden="false">
+												<ul class="nav">
+													<ui:repeat var="sousSousCat" value="#{sousCat.categories}">
+														<li class="souscategorie"><h:commandLink
+																value="#{sousSousCat.libelle}"
+																action="#{rechercheProduitMb.rechercheProduitByCat(sousSousCat.id)}"
+																title="#{sousSousCat.id}" /></li>
+													</ui:repeat>
+												</ul>
+											</div>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{sousCat.categories==null}">
+											<div class="nav">
+												<ul class="nav">
+													<li><h:commandLink value="#{sousCat.libelle}"
+															action="#{menuMb.clickOnCategorie(sousCat.id)}" /></li>
+												</ul>
+											</div>
+										</h:panelGroup>
+									</ui:repeat>
+								</ul>
+							</div>
+						</h:panelGroup>
+					</ui:repeat>
+				</h:panelGroup>
+			</ul>
+		</div>
+	</nav>
+	<script type="text/javascript">
+			$(function() {
+				$("a").hover(function() {
+					try {
+						if($(this).attr("id").contains("cat_mere")) {
+							console.log("mere");
+							afficherSousCat($(this).attr("title"));
+						}
+						if($(this).attr("id").contains("sous_cat")) {
+							console.log("sous_cat");
+							afficherSousCat($(this).attr("title"));
+							afficherSousSousCat($(this).attr("title"));
+						}
+					} catch (e) {
+						// TODO: do nothing
+					}
+				});
+			});
+
+			$(function() {
+				$("a").mouseleave(function() {
+					try {
+// 						if($(this).attr("id").contains("cat_mere")) {
+// 							console.log("sous_cat");
+// 							cacherSousCat($(this).attr("title"));
+// 						}
+// 						if($(this).attr("id").contains("sous_cat")) {
+// 							console.log("sous_sous_cat");
+// 							cacherSousSousCat($(this).attr("title"));
+// 						}
+					} catch (e) {
+						// TODO: do nothing
+					}
+				});
+			});
+			
+
+			function afficherSousCat(parent){
+				$('.sous_cat-' + parent).show();
+			}
+			function cacherSousCat(parent){
+ 				$('.sous_cat-' + parent).hide();
+			}
+			function afficherSousSousCat(parent){
+				$('.sous_sous_cat-' + parent).show();
+			}
+			function cacherSousSousCat(parent){
+ 				$('.sous_sous_cat-' + parent).hide();
+			}
+			</script>
+</ui:composition>
+</html>

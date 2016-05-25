@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template/templatePageClient.xhtml">
+	<ui:define name="titre">Formulaire d'evaluation </ui:define>
+	<ui:define name="mainPage">
+		<div class="fil_ariane">
+			<ul class="breadcrumbs">
+				<li class="home"><h:outputLabel class="home_a"
+						value="Mon Profil" /><span>&#160; &gt; &#160;</span></li>
+				<li class="home"><h:outputLabel class="home_a"
+						value="Historique des commandes" /><span>&#160; &gt;
+						&#160;</span></li>
+				<li class="home"><h:outputLabel class="home_a"
+						value="Detail de la commande" /><span>&#160; &gt; &#160;</span></li>
+				<li class="home"><h:outputLabel value="Evaluation" /></li>
+			</ul>
+			<ul class="previous retour_profil">
+				<li><h:commandLink value="Retour au profil"
+						action="#{connectionMb.afficherProfil()}" /></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="evalution">
+			<h3>Votre Avis</h3>
+			<div class="eval_style">
+				<span>Note : </span>
+				<h:inputHidden value="#{evaluationMb.valeurNote}" name="note"
+					id="note" />
+				<div class="listEtoile">
+					<img src="images/staroff.gif" id="star_1" class="star" /> <img
+						src="images/staroff.gif" id="star_2" class="star" /> <img
+						src="images/staroff.gif" id="star_3" class="star" /> <img
+						src="images/staroff.gif" id="star_4" class="star" /> <img
+						src="images/staroff.gif" id="star_5" class="star" />
+				</div>
+			</div>
+			<div class="eval_style">
+				<span>Commentaire : </span>
+				<div class="commentaire">
+					<h:inputTextarea value="#{evaluationMb.commentaire}" />
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<h:commandButton class="btn_rose" value="Enregistrer"
+				action="#{evaluationMb.noteVendeur()}" />
+		</div>
+		<h:panelGroup rendered="#{evaluationMb.listNoteVendeur.size() != 0}">
+			<div class="evalution">
+				<h3>Votre Denieres Appreciations</h3>
+				<ui:repeat var="note" value="#{evaluationMb.listNoteVendeur}">
+					<div class="eval_style">
+						<span>Note : </span>
+						<div class="listEtoile">
+							<img src="images/staroff.gif" id="star_1" class="star" /> <img
+								src="images/staroff.gif" id="star_2" class="star" /> <img
+								src="images/staroff.gif" id="star_3" class="star" /> <img
+								src="images/staroff.gif" id="star_4" class="star" /> <img
+								src="images/staroff.gif" id="star_5" class="star" />
+						</div>
+					</div>
+					<div class="eval_style">
+						<span>Commentaire : </span>
+						<div class="commentaire">
+							<h:outputText value="#{evaluationMb.commentaire}" />
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</ui:repeat>
+			</div>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{evaluationMb.listNoteVendeur.size() == 0}">
+			<div class="evalution">
+				<h3>Vous n'avez donné aucune appreciation</h3>
+			</div>
+		</h:panelGroup>
+		<script type="text/javascript" src="js/listeEtoile.js"></script>
+	</ui:define>
+</ui:composition>
+</html>

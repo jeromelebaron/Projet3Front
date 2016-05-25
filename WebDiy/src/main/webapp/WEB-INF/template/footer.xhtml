@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition>
+	<footer>
+		<div class="footer">
+			<div class="container">
+				<div class="footer-grid">
+					<h3>Categories</h3>
+					<ul class="list1">
+						<li><a href="accueil.jsf">Accueil</a></li>
+						<ui:repeat var="cat" value="#{menuMb.listCategoriesMere}">
+						<li><h:commandLink value="#{cat.libelle}" action="#{rechercheProduitMb.rechercheProduitByCat(cat.id)}" /> </li>
+						</ui:repeat>
+					</ul>
+				</div>
+				<div class="footer-grid">
+					<h3><h:outputLabel value="Mon Compte" /></h3>
+					<ul class="list1">
+						<li><a href="login.jsf">Connexion</a></li>
+						<li><a href="#{connectionMb.afficherProfil()}">Profil</a></li>
+						<li><h:commandLink action="#{historiqueVenteMb.gererVente()}" value="Mes ventes"/></li>
+						<li><h:commandLink action="#{historiqueCommandeMb.afficherHistoriqueCommande()}" value="Mes commandes" /></li>
+					</ul>
+				</div>
+				<div class="footer-grid">
+					<h3>Nous connaitre</h3>
+					<ul class="list1">
+						<li><a href="contact.jsf">Contact</a></li>
+						<li><a href="about.jsf">A propos</a></li>
+						<li><a href="about.jsf">Recherche avancée</a></li>
+						<li><a href="about.jsf">Mobile</a></li>
+					</ul>
+				</div>
+				<div class="footer-grid">
+					<h3>Newsletter</h3>
+					<p class="footer_desc">S'inscrire à la newsletter</p>
+					<div class="search_footer">
+						<input type="text" class="text" value="Email"
+							onfocus="this.value = '';"
+							onblur="if (this.value == '') {this.value = 'Email';}"/><input
+							type="submit" value="S'abonner"/>
+					</div>
+					<img src="images/payment.png" class="img-responsive" alt="" />
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="footer_bottom">
+			<div class="container">
+				<div class="copy">
+					<p>
+						Copyright <!--  &copy;--> 2016 DIY Decor Home. Tous droits reservés . Design
+						par <a href="http://www.afcepf.fr/" target="_blank">S2RE</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+</ui:composition>
+</html>
