@@ -13,11 +13,6 @@
 						value="Catalogue" /><span>&#160; &gt; &#160;</span></li>
 				<li class="home"><h:outputLabel value="Produit" /></li>
 			</ul>
-			<ul class="previous retour_profil">
-				<li><h:commandLink value="Retour à l'accueil"
-						action="accueil.jsf" /></li>
-			</ul>
-			<div class="clearfix"></div>
 		</div>
 		<div class="singel_right">
 			<div class="labout span_1_of_a1">
@@ -36,136 +31,118 @@
 						</h:panelGroup>
 					</ul>
 				</div>
+				<div class="btn_form button item_add item_1">
+                    <h:commandButton id="ajout" value="Ajouter au panier"
+                        action="#{panierMb.ajoutAuPanier(detailProduitMb.produit.id)}" />
+                </div>
 			</div>
 			<div class="cont1 span_2_of_a1 simpleCart_shelfItem">
 				<h1>
 					<h:outputLabel value="#{detailProduitMb.produit.libelle}" />
 				</h1>
-				<ul class="rating">
-					<li><div class="moyenne_note">
-							<h:inputHidden value="#{detailProduitMb.noteMoyenne}"
-								id="moyenne" />
-						</div>
-						<div>
-							<img src="images/staroff.gif" id="starMoyenne_1"
-								class="starMoyenne" /> <img src="images/staroff.gif"
-								id="starMoyenne_2" class="starMoyenne" /> <img
-								src="images/staroff.gif" id="starMoyenne_3" class="starMoyenne" />
-							<img src="images/staroff.gif" id="starMoyenne_4"
-								class="starMoyenne" /> <img src="images/staroff.gif"
-								id="starMoyenne_5" class="starMoyenne" />
-						</div></li>
-					<li><h:outputLabel
-							value="&#160;&#160;#{detailProduitMb.produit.notes.size()}" />
-						Evaluation(s)</li>
-					<div class="clearfix"></div>
-					<li>Vendu par <h:panelGroup
-									rendered="#{detailProduitMb.produit.vendeur.id != null}">
-									<h:outputLabel
-										value="#{detailProduitMb.produit.vendeur.prenom}&#160;#{detailProduitMb.produit.vendeur.nom}" />
-								</h:panelGroup> <h:panelGroup
-									rendered="#{detailProduitMb.produit.vendeur.id == null}">
-									<h:outputLabel value="DDH" />
-								</h:panelGroup>
-					</li>
-					<div class="clearfix"></div>
-				</ul>
-				<div class="price_single">
-					<span class="amount item_price actual"><h:outputLabel
-							value="#{detailProduitMb.produit.prix} €" /></span>
+				<div class="row marge-aerer">
+					<div class="moyenne_note">
+						<h:inputHidden value="#{detailProduitMb.noteMoyenne}" id="moyenne" />
+					</div>
+					<div class="col-md-3">
+						<img src="images/staroff.gif" id="starMoyenne_1"
+							class="starMoyenne" /> <img src="images/staroff.gif"
+							id="starMoyenne_2" class="starMoyenne" /> <img
+							src="images/staroff.gif" id="starMoyenne_3" class="starMoyenne" />
+						<img src="images/staroff.gif" id="starMoyenne_4"
+							class="starMoyenne" /> <img src="images/staroff.gif"
+							id="starMoyenne_5" class="starMoyenne" />
+					</div>
+					<h:outputLabel
+						value="&#160;&#160;#{detailProduitMb.produit.notes.size()}" />
+					Evaluation(s)
 				</div>
-				<h3 class="quick">Etat:</h3>
-				<p class="quick_desc">
-					<h:outputText value="#{detailProduitMb.produit.etat.libelle}" />
-				</p>
-				<h3 class="quick">Description:</h3>
-				<p class="quick_desc">
-					<h:outputText
-						value="#{detailProduitMb.produit.description.subSequence(0, 150)}...... " />
-				</p>
-				<ul class="product-qty">
-					<span>Quantite:</span>
-					<h:selectOneMenu value="#{panierMb.qte}">
-						<f:selectItem itemLabel="1" itemValue="1" />
-						<f:selectItem itemLabel="2" itemValue="2" />
-						<f:selectItem itemLabel="3" itemValue="3" />
-						<f:selectItem itemLabel="4" itemValue="4" />
-						<f:selectItem itemLabel="5" itemValue="5" />
-						<f:selectItem itemLabel="6" itemValue="6" />
-						<f:selectItem itemLabel="7" itemValue="7" />
-						<f:selectItem itemLabel="8" itemValue="8" />
-						<f:selectItem itemLabel="9" itemValue="9" />
-						<f:selectItem itemLabel="10" itemValue="10" />
-					</h:selectOneMenu>
-				</ul>
-				<div class="btn_form button item_add item_1">
-					<h:commandButton id="ajout" value="Ajouter au panier"
-						action="#{panierMb.ajoutAuPanier(detailProduitMb.produit.id)}" />
+				<div class="row marge-aerer center-horizontal">
+					<div class="col-md-5">
+						Vendu par
+						<h:panelGroup
+							rendered="#{detailProduitMb.produit.vendeur.id != null}">
+							<h:outputLabel
+								value="#{detailProduitMb.produit.vendeur.prenom}&#160;#{detailProduitMb.produit.vendeur.nom}" />
+						</h:panelGroup>
+						<h:panelGroup
+							rendered="#{detailProduitMb.produit.vendeur.id == null}">
+							<h:outputLabel value="DDH" />
+						</h:panelGroup>
+					</div>
+					<h:outputText value="#{detailProduitMb.produit.etat.libelle}"
+						styleClass="col-md-3" />
+					<div class="prix col-md-offset-1 col-md-3">
+						<span class="amount item_price actual"><h:outputLabel
+								value="#{detailProduitMb.produit.prix} €" /></span>
+					</div>
 				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="sap_tabs">
-			<div id="horizontalTab"
-				style="display: block; width: 100%; margin: 0px;">
-				<ul class="resp-tabs-list">
-					<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Evaluations</span></li>
-					<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Description
-							du Produit</span></li>
-					<div class="clear"></div>
-				</ul>
-				<div class="resp-tabs-container">
-					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-						<div class="facts">
-							<ul class="tab_list">
-								<h:panelGroup
-									rendered="#{not empty detailProduitMb.produit.notes}">
-									<div class="decal_com">
-										<ui:repeat var="note" value="#{detailProduitMb.produit.notes}">
-											<li>
-												<div class="eval_style_com test_toto_titi">
-													<h:inputHidden value="#{note.note}" name="note" id="note" />
-													<div>
-														<img src="images/staroff.gif" id="starNonNull_1"
-															class="starNonNull" /> <img src="images/staroff.gif"
-															id="starNonNull_2" class="starNonNull" /> <img
-															src="images/staroff.gif" id="starNonNull_3"
-															class="starNonNull" /> <img src="images/staroff.gif"
-															id="starNonNull_4" class="starNonNull" /> <img
-															src="images/staroff.gif" id="starNonNull_5"
-															class="starNonNull" />
-														<h:outputLabel
-															value="&#160;#{note.noteur.prenom} &#160;#{note.noteur.nom},&#160;le &#160;"
-															class="noteur_aff noteur_r" />
-														<h:outputLabel value="#{note.date}" class="noteur_aff">
-															<f:convertDateTime pattern="dd/MM/yyyy" />
-														</h:outputLabel>
-													</div>
-												</div>
-												<div class="txt_com">
-													<h:outputLabel value="#{note.commentaire}" />
-												</div>
-											</li>
-										</ui:repeat>
-									</div>
-								</h:panelGroup>
-								<h:panelGroup rendered="#{empty detailProduitMb.produit.notes}">
-									<h:outputLabel value="Aucune évaluation" />
+				<div class="sap_tabs">
+					<div id="horizontalTab"
+						style="display: block; width: 100%; margin: 0px;">
+						<ul class="resp-tabs-list">
+							<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Evaluations</span></li>
+							<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Description
+									du Produit</span></li>
+							<div class="clear"></div>
+						</ul>
+						<div class="resp-tabs-container">
+							<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+								<div class="facts">
+									<ul class="tab_list">
+										<h:panelGroup
+											rendered="#{not empty detailProduitMb.produit.notes}">
+											<div class="decal_com">
+												<ui:repeat var="note"
+													value="#{detailProduitMb.produit.notes}">
+													<li>
+														<div class="eval_style_com test_toto_titi">
+															<h:inputHidden value="#{note.note}" name="note" id="note" />
+															<div>
+																<img src="images/staroff.gif" id="starNonNull_1"
+																	class="starNonNull" /> <img src="images/staroff.gif"
+																	id="starNonNull_2" class="starNonNull" /> <img
+																	src="images/staroff.gif" id="starNonNull_3"
+																	class="starNonNull" /> <img src="images/staroff.gif"
+																	id="starNonNull_4" class="starNonNull" /> <img
+																	src="images/staroff.gif" id="starNonNull_5"
+																	class="starNonNull" />
+																<h:outputLabel
+																	value="&#160;#{note.noteur.prenom} &#160;#{note.noteur.nom},&#160;le &#160;"
+																	class="noteur_aff noteur_r" />
+																<h:outputLabel value="#{note.date}" class="noteur_aff">
+																	<f:convertDateTime pattern="dd/MM/yyyy" />
+																</h:outputLabel>
+															</div>
+														</div>
+														<div class="txt_com">
+															<h:outputLabel value="#{note.commentaire}" />
+														</div>
+													</li>
+												</ui:repeat>
+											</div>
+										</h:panelGroup>
+										<h:panelGroup
+											rendered="#{empty detailProduitMb.produit.notes}">
+											<h:outputLabel value="Aucune évaluation" />
 
-								</h:panelGroup>
-							</ul>
-						</div>
-					</div>
-					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
-						<div class="facts">
-							<ul class="tab_list">
-								<h:outputText value="#{detailProduitMb.produit.description} " />
-							</ul>
+										</h:panelGroup>
+									</ul>
+								</div>
+							</div>
+							<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
+								<div class="facts">
+									<ul class="tab_list">
+										<h:outputText value="#{detailProduitMb.produit.description} " />
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<script type="text/javascript" src="js/jquery.flexisel.js"></script>
 		<script src="js/jquery.flexslider.js"></script>
 		<link rel="stylesheet" href="css/flexslider.css" type="text/css"

@@ -6,48 +6,51 @@
 	<nav>
 		<div class="menu_box">
 			<h3 class="menu_head">Categories</h3>
-			<ul class="nav">
-				<h:panelGroup rendered="#{menuMb.listCategoriesMere != null}">
-					<ui:repeat var="categorieMere" value="#{menuMb.listCategoriesMere}">
-						<li><h:commandLink value="#{categorieMere.libelle}"
-								action="#{rechercheProduitMb.rechercheProduitByCat(categorieMere.id)}"
-								id="cat_mere" title="#{categorieMere.id}" /></li>
-						<h:panelGroup rendered="#{categorieMere.categories != null}">
-							<div class="navig sous_cat-#{categorieMere.id}" id="sous_cat" title="#{categorieMere.id}"
-								hidden="false">
-								<ul class="nav">
-									<ui:repeat var="sousCat" value="#{categorieMere.categories}">
-										<li><h:commandLink value="#{sousCat.libelle}"
-												action="#{rechercheProduitMb.rechercheProduitByCat(sousCat.id)}"
-												id="sous_cat_mere" title="#{sousCat.id}" /></li>
-										<h:panelGroup rendered="#{sousCat.categories != null}">
-											<div class="navig sous_sous_cat-#{sousCat.id}"
-												id="sous_sous_cat" title="#{sousCat.id}" hidden="false">
-												<ul class="nav">
-													<ui:repeat var="sousSousCat" value="#{sousCat.categories}">
-														<li class="souscategorie"><h:commandLink
-																value="#{sousSousCat.libelle}"
-																action="#{rechercheProduitMb.rechercheProduitByCat(sousSousCat.id)}"
-																title="#{sousSousCat.id}" /></li>
-													</ui:repeat>
-												</ul>
-											</div>
-										</h:panelGroup>
-										<h:panelGroup rendered="#{sousCat.categories==null}">
-											<div class="nav">
-												<ul class="nav">
-													<li><h:commandLink value="#{sousCat.libelle}"
-															action="#{menuMb.clickOnCategorie(sousCat.id)}" /></li>
-												</ul>
-											</div>
-										</h:panelGroup>
-									</ui:repeat>
-								</ul>
-							</div>
-						</h:panelGroup>
-					</ui:repeat>
-				</h:panelGroup>
-			</ul>
+			<div id="liste-categories">
+				<ul class="nav">
+					<h:panelGroup rendered="#{menuMb.listCategoriesMere != null}">
+						<ui:repeat var="categorieMere"
+							value="#{menuMb.listCategoriesMere}">
+							<li><h:commandLink value="#{categorieMere.libelle}"
+									action="#{rechercheProduitMb.rechercheProduitByCat(categorieMere.id)}"
+									id="cat_mere" title="#{categorieMere.id}" /></li>
+							<h:panelGroup rendered="#{categorieMere.categories != null}">
+								<div class="navig sous_cat-#{categorieMere.id}" id="sous_cat"
+									title="#{categorieMere.id}" hidden="false">
+									<ul class="nav">
+										<ui:repeat var="sousCat" value="#{categorieMere.categories}">
+											<li><h:commandLink value="#{sousCat.libelle}"
+													action="#{rechercheProduitMb.rechercheProduitByCat(sousCat.id)}"
+													id="sous_cat_mere" title="#{sousCat.id}" /></li>
+											<h:panelGroup rendered="#{sousCat.categories != null}">
+												<div class="navig sous_sous_cat-#{sousCat.id}"
+													id="sous_sous_cat" title="#{sousCat.id}" hidden="false">
+													<ul class="nav">
+														<ui:repeat var="sousSousCat" value="#{sousCat.categories}">
+															<li class="souscategorie"><h:commandLink
+																	value="#{sousSousCat.libelle}"
+																	action="#{rechercheProduitMb.rechercheProduitByCat(sousSousCat.id)}"
+																	title="#{sousSousCat.id}" /></li>
+														</ui:repeat>
+													</ul>
+												</div>
+											</h:panelGroup>
+											<h:panelGroup rendered="#{sousCat.categories==null}">
+												<div class="nav">
+													<ul class="nav">
+														<li><h:commandLink value="#{sousCat.libelle}"
+																action="#{menuMb.clickOnCategorie(sousCat.id)}" /></li>
+													</ul>
+												</div>
+											</h:panelGroup>
+										</ui:repeat>
+									</ul>
+								</div>
+							</h:panelGroup>
+						</ui:repeat>
+					</h:panelGroup>
+				</ul>
+			</div>
 		</div>
 	</nav>
 	<script type="text/javascript">

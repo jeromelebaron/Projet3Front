@@ -3,58 +3,59 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition>
-	<ul class="login">
-		<h:panelGroup rendered="#{connectionMb.user == null}">
-			<li class="login_text"><a href="login.jsf">Se connecter</a></li>
-		</h:panelGroup>
-		<h:panelGroup rendered="#{connectionMb.user != null}">
-			<div class="login_text lien_bjr_panier">
+	<h:panelGroup id="panier">
+		<ul class="login">
+			<h:panelGroup rendered="#{connectionMb.user == null}">
+				<li class="login_text"><a href="login.jsf">Se connecter</a></li>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{connectionMb.user != null}">
+				<div class="login_text lien_bjr_panier">
 					<h:commandLink action="#{connectionMb.afficherProfil()}"
 						value="Bonjour &#160;#{connectionMb.user.prenom} &#160;#{connectionMb.user.nom}" />
 				</div>
-				<li class="login_text">
-					<h:commandLink action="#{connectionMb.seDeconnecter()}"
-						value="Se déconnecter" />
+				<li class="login_text"><h:commandLink
+						action="#{connectionMb.seDeconnecter()}" value="Se déconnecter" />
 				</li>
-		</h:panelGroup>
-		<li class="wish"><a href="checkout.jsf">Liste d'envie</a></li>
-		<div class='clearfix'></div>
-	</ul>
-	<div class="cart_bg">
-		<ul class="cart">
-			<a href="checkout.jsf">
-				<h4>
-					<i class="cart_icon"> </i>
-					<p>
-						Panier:
-						<h:outputLabel value="#{panierMb.totalPanier} €" />
-						(
-						<h:outputLabel value="#{panierMb.totalProduits}" />
-						<h:panelGroup rendered="#{panierMb.totalProduits &lt; 2}">
+			</h:panelGroup>
+			<li class="wish"><a href="checkout.jsf">Liste d'envie</a></li>
+			<div class='clearfix'></div>
+		</ul>
+		<div class="cart_bg">
+			<ul class="cart">
+				<a href="checkout.jsf">
+					<h4>
+						<i class="cart_icon"> </i>
+						<p>
+							Panier:
+							<h:outputLabel value="#{panierMb.totalPanier} €" />
+							(
+							<h:outputLabel value="#{panierMb.totalProduits}" />
+							<h:panelGroup rendered="#{panierMb.totalProduits &lt; 2}">
 							produit
 							</h:panelGroup>
-						<h:panelGroup rendered="#{panierMb.totalProduits &gt; 1}">
+							<h:panelGroup rendered="#{panierMb.totalProduits &gt; 1}">
 							produits
 							</h:panelGroup>
-						)
-					</p>
-					<div class="clearfix"></div>
-				</h4>
-			</a>
-			<div class="clearfix"></div>
+							)
+						</p>
+						<div class="clearfix"></div>
+					</h4>
+				</a>
+				<div class="clearfix"></div>
+			</ul>
+		</div>
+		<ul class="quick_access">
+			<li class="view_cart"><a href="checkout.jsf">Voir le panier</a></li>
+			<li class="check"><a href="checkout.jsf">Acheter</a></li>
+			<div class='clearfix'></div>
 		</ul>
-	</div>
-	<ul class="quick_access">
-		<li class="view_cart"><a href="checkout.jsf">Voir le panier</a></li>
-		<li class="check"><a href="checkout.jsf">Acheter</a></li>
-		<div class='clearfix'></div>
-	</ul>
-	<div class="search">
-		<h:inputText value="#{rechercheProduitMb.libelle}"
-			onblur="if (this.value == '') {this.value = 'Rechercher';}" />
-		<h:commandLink action="#{rechercheProduitMb.rechercheProduit()}">
-			<span class="recherche" />
-		</h:commandLink>
-	</div>
+		<div class="search">
+			<h:inputText value="#{rechercheProduitMb.libelle}"
+				onblur="if (this.value == '') {this.value = 'Rechercher';}" />
+			<h:commandLink action="#{rechercheProduitMb.rechercheProduit()}">
+				<span class="recherche" />
+			</h:commandLink>
+		</div>
+	</h:panelGroup>
 </ui:composition>
 </html>

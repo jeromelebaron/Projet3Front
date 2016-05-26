@@ -752,7 +752,7 @@ h3.menu_head {
 }
 
 ul.nav {
-	padding: 15px 0 15px 5px;
+	padding: 1px 0 1px 5px;
 	list-style: none;
 	background: #68656A;
 }
@@ -1362,7 +1362,7 @@ ul.category_nav li a:hover {
 }
 /*--single--*/
 .singel_right {
-	margin-top: 3em;
+	
 }
 
 .span_1_of_a1 {
@@ -3531,18 +3531,37 @@ a.cpns {
 	justify-content: center;
 }
 
-#google-map{
+#google-map {
 	margin-top: 30px;
 }
 
-.align-vertical{
+.align-vertical {
 	align-items: center;
 }
 
-#images-cartes{
+#images-cartes {
 	margin-top: 10px;
 }
 
-.marge-bottom{
+.marge-bottom {
 	margin-bottom: 40px;
+}
+
+#liste-categories {
+	background: #68656A;
+	padding: 10px 0;
+}
+
+.prix {
+	font-size: 1.3em;
+}
+
+.marge-aerer {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.center-horizontal {
+	display: flex;
+	align-items: center;
 }

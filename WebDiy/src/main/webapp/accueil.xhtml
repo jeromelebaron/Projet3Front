@@ -15,9 +15,13 @@
 							action="#{detailProduitMb.afficherDetailProduit(produit.id)}">
 							<div class="inner_content clearfix">
 								<div class="product_image">
-									<img src="#{produit.images.get(0).url}" class="img-responsive" alt="Pas d'images" />
-									<h:commandLink value="" action="#{panierMb.ajoutAuPanier(produit.id)}"
-										class="button item_add item_1" />
+									<img src="#{produit.images.get(0).url}" class="img-responsive"
+										alt="Pas d'images" />
+									<h:commandLink value=""
+										action="#{panierMb.ajoutAuPanier(produit.id)}"
+										class="button item_add item_1">
+										<f:ajax render=":monForm:panier" />
+									</h:commandLink>
 									<div class="product_container">
 										<div class="cart-left">
 											<h:outputLabel value="#{produit.libelle}" class="title" />
