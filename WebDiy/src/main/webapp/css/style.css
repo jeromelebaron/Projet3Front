@@ -44,7 +44,7 @@ body a {
 }
 
 .header-top {
-	padding: 2em 0 3em;
+	padding: 1em 0 1em;
 }
 
 .logo {
@@ -82,7 +82,6 @@ body a {
 .header_right {
 	float: right;
 	margin-top: 2em;
-	width: 24%;
 }
 
 .lang_list {
@@ -260,7 +259,6 @@ ul.social {
 	padding: 0;
 	list-style: none;
 	float: left;
-	margin-right: 2em;
 }
 
 ul.social li:first-child {
@@ -492,8 +490,8 @@ ul.quick_access li.check {
 
 .welcome_box {
 	background: #31C2DB;
-	padding: 3em 1.4em;
-	margin-top: 10px;
+	padding: 15px 1.4em;
+	margin-bottom: 20px;
 }
 
 .welcome_box h3 {
@@ -511,7 +509,6 @@ ul.quick_access li.check {
 
 .banner_right {
 	float: right;
-	margin-top: 4em;
 	width: 50%;
 }
 
@@ -741,7 +738,7 @@ ul.quick_access li.check {
 }
 
 .content_box {
-	padding: 5em 0 3em;
+	padding: 3em 0 3em;
 }
 
 h3.menu_head {

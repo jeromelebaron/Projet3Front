@@ -3,7 +3,6 @@ package fr.s2re.managedbean;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -12,7 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import fr.s2re.dto.CommandeDto;
 import fr.s2re.dto.LigneDeCommandeDto;
+import fr.s2re.dto.ProduitDto;
 import fr.s2re.dto.UtilisateurDto;
 import fr.s2re.iuc.IUcClient;
 import fr.s2re.iuc.IUcUtilisateur;
@@ -20,6 +21,10 @@ import fr.s2re.iuc.IUcUtilisateur;
 @ManagedBean
 @SessionScoped
 public class PanierMb {
+
+    /**
+     * La quantité totale de produits dans le panier.
+     */
     private int totalProduits = 0;
 
     private int qte = 1;
@@ -31,10 +36,12 @@ public class PanierMb {
     private Double panierFraisLivraison = 0.0;
 
     private UtilisateurDto user;
+    /**
+     * La commande en cours de création du panier.
+     */
+    private CommandeDto commandeDto = new CommandeDto();
 
-    private List<LigneDeCommandeDto> listLigneDeCommande = new ArrayList<>();
-
-    private HashMap<LigneDeCommandeDto, Double> mapLigneCmd = new HashMap<>();
+    private Map<LigneDeCommandeDto, Double> mapLigneCmd = new HashMap<>();
 
     @EJB
     private IUcUtilisateur ucUtilisateur;
@@ -55,15 +62,21 @@ public class PanierMb {
         } else {
             user = null;
         }
+        commandeDto.setLignesDeCommande(new ArrayList<LigneDeCommandeDto>());
     }
 
+    /**
+     * Pour ajouter un {@link ProduitDto} au panier.
+     * @param paramIdProduit l'id du {@link ProduitDto} à ajouter.
+     * @return sur la même page.
+     */
     public String ajoutAuPanier(int paramIdProduit) {
         LigneDeCommandeDto ligne = new LigneDeCommandeDto();
         ligne.setQuantite(qte);
         ligne.setProduit(ucUtilisateur.getById(paramIdProduit));
         boolean produitDiff = true;
-        if (!listLigneDeCommande.isEmpty()) {
-            for (LigneDeCommandeDto l : listLigneDeCommande) {
+        if (!commandeDto.getLignesDeCommande().isEmpty()) {
+            for (LigneDeCommandeDto l : commandeDto.getLignesDeCommande()) {
                 if (l.getProduit().getId() == ligne.getProduit().getId()) {
                     l.setQuantite(ligne.getQuantite() + l.getQuantite());
                     produitDiff = false;
@@ -71,12 +84,14 @@ public class PanierMb {
                 }
             }
             if (produitDiff) {
-                listLigneDeCommande.add(ligne);
+                commandeDto.getLignesDeCommande().add(ligne);
+                totalProduits++;
             }
         } else {
-            listLigneDeCommande.add(ligne);
+            commandeDto.getLignesDeCommande().add(ligne);
+            totalProduits++;
         }
-        for (LigneDeCommandeDto l : listLigneDeCommande) {
+        for (LigneDeCommandeDto l : commandeDto.getLignesDeCommande()) {
             mapLigneCmd.put(l, l.getProduit().getPrix() * l.getQuantite());
         }
         qte = 1;
@@ -84,29 +99,31 @@ public class PanierMb {
     }
 
     public String decrementeQteProduit(int paramIdPdt) {
-        for (LigneDeCommandeDto l : listLigneDeCommande) {
+        for (LigneDeCommandeDto l : commandeDto.getLignesDeCommande()) {
             if (l.getProduit().getId() == paramIdPdt) {
                 if (l.getQuantite() > 1) {
                     l.setQuantite(l.getQuantite() - 1);
                 }
             }
             mapLigneCmd.put(l, l.getProduit().getPrix() * l.getQuantite());
+            totalProduits--;
         }
         return "";
     }
 
     public String incrementeQteProduit(int paramIdPdt) {
-        for (LigneDeCommandeDto l : listLigneDeCommande) {
+        for (LigneDeCommandeDto l : commandeDto.getLignesDeCommande()) {
             if (l.getProduit().getId() == paramIdPdt) {
                 l.setQuantite(l.getQuantite() + 1);
             }
             mapLigneCmd.put(l, l.getProduit().getPrix() * l.getQuantite());
+            totalProduits++;
         }
         return "";
     }
 
     public String supprProduit(Integer paramIdPdt) {
-        Iterator<LigneDeCommandeDto> iterator = listLigneDeCommande.iterator();
+        Iterator<LigneDeCommandeDto> iterator = commandeDto.getLignesDeCommande().iterator();
         while (iterator.hasNext()) {
             Integer idProduit = iterator.next().getProduit().getId();
             if (idProduit == paramIdPdt) {
@@ -120,7 +137,7 @@ public class PanierMb {
     public String viderPanier() {
         totalPanier = 0.0;
         totalProduits = 0;
-        listLigneDeCommande = new ArrayList<>();
+        commandeDto.setLignesDeCommande(new ArrayList<LigneDeCommandeDto>());
         coupon = "";
         mapLigneCmd = new HashMap<>();
         panierFraisLivraison = 0.0;
@@ -136,12 +153,20 @@ public class PanierMb {
         qte = paramQte;
     }
 
-    public List<LigneDeCommandeDto> getListLigneDeCommande() {
-        return listLigneDeCommande;
+    /**
+     * Accesseur en lecture du champ <code>commandeDto</code>.
+     * @return le champ <code>commandeDto</code>.
+     */
+    public CommandeDto getCommandeDto() {
+        return commandeDto;
     }
 
-    public void setListLigneDeCommande(List<LigneDeCommandeDto> paramListLigneDeCommande) {
-        listLigneDeCommande = paramListLigneDeCommande;
+    /**
+     * Accesseur en écriture du champ <code>commandeDto</code>.
+     * @param paramCommandeDto la valeur à écrire dans <code>commandeDto</code>.
+     */
+    public void setCommandeDto(CommandeDto paramCommandeDto) {
+        commandeDto = paramCommandeDto;
     }
 
     public IUcUtilisateur getUcUtilisateur() {
@@ -162,8 +187,8 @@ public class PanierMb {
 
     public Double getTotalPanier() {
         totalPanier = 0.0;
-        if (!listLigneDeCommande.isEmpty()) {
-            for (LigneDeCommandeDto l : listLigneDeCommande) {
+        if (!commandeDto.getLignesDeCommande().isEmpty()) {
+            for (LigneDeCommandeDto l : commandeDto.getLignesDeCommande()) {
                 totalPanier += l.getProduit().getPrix() * l.getQuantite();
             }
         }
@@ -176,12 +201,6 @@ public class PanierMb {
     }
 
     public int getTotalProduits() {
-        totalProduits = 0;
-        if (!listLigneDeCommande.isEmpty()) {
-            for (LigneDeCommandeDto l : listLigneDeCommande) {
-                totalProduits += l.getQuantite();
-            }
-        }
         return totalProduits;
     }
 
@@ -217,7 +236,7 @@ public class PanierMb {
         return mapLigneCmd;
     }
 
-    public void setMapLigneCmd(HashMap<LigneDeCommandeDto, Double> paramMapLigneCmd) {
+    public void setMapLigneCmd(Map<LigneDeCommandeDto, Double> paramMapLigneCmd) {
         mapLigneCmd = paramMapLigneCmd;
     }
 
