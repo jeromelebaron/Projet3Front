@@ -15,6 +15,7 @@
 	<modules>
 		<module>Parent</module>
 		<module>Entity</module>
+		<module>Proxys</module>
 		<module>ApiData</module>
 		<module>Data</module>
 		<module>Dto</module>
