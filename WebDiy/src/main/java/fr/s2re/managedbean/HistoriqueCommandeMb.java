@@ -20,14 +20,21 @@ import fr.s2re.iuc.IUcClient;
 @ManagedBean
 @SessionScoped
 public class HistoriqueCommandeMb {
+
     private static Logger log = Logger.getLogger(HistoriqueCommandeMb.class);
 
-    private List<CommandeDto> commandes = null; // la liste des commandes parentes
-
-    private List<CommandeDto> commandeDetails = null; // liste d'une commande suivi de ses sous commandes
-
-    private List<LigneDeCommandeDto> lignesDeCommande = new ArrayList<>(); // liste des ligne de commandes d'une commande et de ses sous
-                                                                           // commandes
+    /**
+     * la liste des commandes parentes
+     */
+    private List<CommandeDto> commandes = null;
+    /**
+     * liste d'une commande suivi de ses sous commandes
+     */
+    private List<CommandeDto> commandeDetails = null;
+    /**
+     * liste des ligne de commandes d'une commande et de ses sous commandes
+     */
+    private List<LigneDeCommandeDto> lignesDeCommande = new ArrayList<>();
 
     private CommandeDto commandeRecherche = new CommandeDto();
 
@@ -41,7 +48,8 @@ public class HistoriqueCommandeMb {
 
     @PostConstruct
     public void init() {
-        if (connectionMb.getUser() != null && connectionMb != null && connectionMb.getUser().getClass() == ClientDto.class) {
+        if (connectionMb.getUser() != null && connectionMb != null
+                && connectionMb.getUser().getClass() == ClientDto.class) {
             client = (ClientDto) connectionMb.getUser();
         } else {
             client = null;

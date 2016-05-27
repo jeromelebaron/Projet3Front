@@ -52,7 +52,7 @@
 													action="#{panierMb.decrementeQteProduit(ligne.produit.id)}" />
 												<h:outputLabel id="output" value="#{ligne.quantite}" />
 												<h:commandButton class="btnCrement" value="+"
-													action="#{panierMb.incrementeQteProduit(ligne.produit.id)}" />
+													action="#{panierMb.ajoutAuPanier(ligne.produit.id)}" />
 											</p></li>
 										<li><p>
 												Prix :

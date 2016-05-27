@@ -27,8 +27,6 @@ public class PanierMb {
      */
     private int totalProduits = 0;
 
-    private int qte = 1;
-
     private String coupon;
 
     private Double totalPanier = 0.0;
@@ -72,7 +70,7 @@ public class PanierMb {
      */
     public String ajoutAuPanier(int paramIdProduit) {
         LigneDeCommandeDto ligne = new LigneDeCommandeDto();
-        ligne.setQuantite(qte);
+        ligne.setQuantite(1);
         ligne.setProduit(ucUtilisateur.getById(paramIdProduit));
         boolean produitDiff = true;
         if (!commandeDto.getLignesDeCommande().isEmpty()) {
@@ -80,6 +78,7 @@ public class PanierMb {
                 if (l.getProduit().getId() == ligne.getProduit().getId()) {
                     l.setQuantite(ligne.getQuantite() + l.getQuantite());
                     produitDiff = false;
+                    totalProduits++;
                     break;
                 }
             }
@@ -94,7 +93,6 @@ public class PanierMb {
         for (LigneDeCommandeDto l : commandeDto.getLignesDeCommande()) {
             mapLigneCmd.put(l, l.getProduit().getPrix() * l.getQuantite());
         }
-        qte = 1;
         return "";
     }
 
@@ -111,17 +109,6 @@ public class PanierMb {
         return "";
     }
 
-    public String incrementeQteProduit(int paramIdPdt) {
-        for (LigneDeCommandeDto l : commandeDto.getLignesDeCommande()) {
-            if (l.getProduit().getId() == paramIdPdt) {
-                l.setQuantite(l.getQuantite() + 1);
-            }
-            mapLigneCmd.put(l, l.getProduit().getPrix() * l.getQuantite());
-            totalProduits++;
-        }
-        return "";
-    }
-
     public String supprProduit(Integer paramIdPdt) {
         Iterator<LigneDeCommandeDto> iterator = commandeDto.getLignesDeCommande().iterator();
         while (iterator.hasNext()) {
@@ -134,6 +121,10 @@ public class PanierMb {
         return "";
     }
 
+    /**
+     * Pour vider complètement le panier.
+     * @return sur la page d'accueil.
+     */
     public String viderPanier() {
         totalPanier = 0.0;
         totalProduits = 0;
@@ -141,16 +132,7 @@ public class PanierMb {
         coupon = "";
         mapLigneCmd = new HashMap<>();
         panierFraisLivraison = 0.0;
-        qte = 0;
         return "accueil.xhtml?faces-redirect=true";
-    }
-
-    public int getQte() {
-        return qte;
-    }
-
-    public void setQte(int paramQte) {
-        qte = paramQte;
     }
 
     /**
