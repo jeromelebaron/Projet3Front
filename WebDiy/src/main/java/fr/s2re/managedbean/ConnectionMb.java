@@ -20,7 +20,7 @@ import fr.s2re.iuc.IUcUtilisateur;
 @SessionScoped
 public class ConnectionMb {
 
-    private final static String URL_ACCUEIL = "/accueil.xhtml?faces-redirect=true";
+    private static final String URL_ACCUEIL = "/accueil.xhtml?faces-redirect=true";
 
     private static Logger log = Logger.getLogger(ConnectionMb.class);
 
@@ -70,18 +70,11 @@ public class ConnectionMb {
     }
 
     public String seDeconnecter() {
-        ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getSession().invalidate();
+        ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest())
+                .getSession().invalidate();
         return URL_ACCUEIL;
     }
 
-    /*
-     * public void securePage(ComponentSystemEvent event) { boolean test = true; if (user == null) { test = false; } else {
-     * HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance() .getExternalContext().getRequest();
-     * if(request.getRequestURL().toString().contains("accueilUser") && user.getClass() != Client.class) { test = false; }
-     * if(request.getRequestURL().toString().contains("accueilConseiller") && user.getClass() != Conseiller.class) { test = false; } }
-     * if(!test) { ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance()
-     * .getApplication().getNavigationHandler(); nav.performNavigation("/accueil.xhtml?faces-redirect=true"); } }
-     */
     public UtilisateurDto getUser() {
         return user;
     }
