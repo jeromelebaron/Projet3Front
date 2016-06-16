@@ -3565,3 +3565,12 @@ a.cpns {
 	display: flex;
 	align-items: center;
 }
+
+.btn-ajouter{
+	background: rgb(49, 194, 219);
+	border-color: rgb(49, 194, 219);
+}
+
+.erreur{
+	color: red;
+}

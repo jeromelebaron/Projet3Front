@@ -23,9 +23,9 @@
 				<div class="tab_commande">
 					<h3 class="quick">Récapitulatif de la commande</h3>
 					<h:panelGroup
-						rendered="#{panierMb.listLigneDeCommande.size() != 0}">
+						rendered="#{panierMb.commandeDto.lignesDeCommande.size() != 0}">
 						<table class="table table_col">
-							<ui:repeat var="ligne" value="#{panierMb.listLigneDeCommande}">
+							<ui:repeat var="ligne" value="#{panierMb.commandeDto.lignesDeCommande}">
 								<tr>
 									<th><div class="image_tab">
 											<img src="#{ligne.produit.images.get(0).url}"
