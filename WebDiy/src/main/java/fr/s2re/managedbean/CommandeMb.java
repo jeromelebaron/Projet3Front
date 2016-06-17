@@ -91,7 +91,7 @@ public class CommandeMb {
     private ClientMb clientMb;
 
     public String commander() {
-        listLigneDeCommande = panierMb.getListLigneDeCommande();
+        listLigneDeCommande = panierMb.getCommandeDto().getLignesDeCommande();
         mapLigneCommandeStockInsuffisant = ucPanier.validerPanier(listLigneDeCommande);
         if (!mapLigneCommandeStockInsuffisant.isEmpty()) {
             return "";

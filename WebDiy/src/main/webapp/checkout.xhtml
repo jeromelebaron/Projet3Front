@@ -2,6 +2,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+
 <ui:composition template="/WEB-INF/template/templateSansMenu.xhtml">
 	<ui:define name="titre">Mon panier</ui:define>
 	<ui:define name="mainPage">
@@ -12,8 +13,10 @@
 					<h:outputLabel value="#{panierMb.totalProduits}" />
 					)
 				</h1>
-				<h:panelGroup rendered="#{panierMb.listLigneDeCommande.size() != 0}">
-					<ui:repeat var="ligne" value="#{panierMb.listLigneDeCommande}">
+				<h:panelGroup
+					rendered="#{panierMb.commandeDto.lignesDeCommande.size() != 0}">
+					<ui:repeat var="ligne"
+						value="#{panierMb.commandeDto.lignesDeCommande}">
 						<script> 
  						$(document).ready(
  							function(c) {
@@ -49,7 +52,7 @@
 													action="#{panierMb.decrementeQteProduit(ligne.produit.id)}" />
 												<h:outputLabel id="output" value="#{ligne.quantite}" />
 												<h:commandButton class="btnCrement" value="+"
-													action="#{panierMb.incrementeQteProduit(ligne.produit.id)}" />
+													action="#{panierMb.ajoutAuPanier(ligne.produit.id)}" />
 											</p></li>
 										<li><p>
 												Prix :

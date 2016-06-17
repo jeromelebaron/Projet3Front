@@ -39,7 +39,6 @@ public class PaiementTest {
 		try {
 			date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
 		} catch (DatatypeConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		 LOGGER.debug("Ajout credit");

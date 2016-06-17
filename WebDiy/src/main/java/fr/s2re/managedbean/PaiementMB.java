@@ -9,7 +9,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import fr.s2re.banque.servicebanque.CarteBancaireDto;
-import fr.s2re.banque.servicebanque.CompteBancaireDto;
 import fr.s2re.dto.CartePaiementDto;
 import fr.s2re.dto.ClientDto;
 import fr.s2re.dto.CommandeDto;
@@ -32,9 +31,6 @@ public class PaiementMB {
      */
     @EJB
     private IUcTransactionBancaire ucTransactionBancaire;
-    /**
-     * Pour verifier solde
-     */
 
     /**
      * Pour faire une commande.
@@ -46,11 +42,11 @@ public class PaiementMB {
      */
     private UtilisateurDto user;
     /**
-     * nom titulaire carte 
+     * nom titulaire carte
      */
     private String nomTitulaire;
-   
-	/**
+
+    /**
      * La Commande à payer
      */
     private CommandeDto commandeDto;
@@ -87,23 +83,24 @@ public class PaiementMB {
      * @return sur la page de confirmation de la commande si le paiement est validé.
      */
     public String payer() {
-		if (connectionMb != null && connectionMb.getUser() != null) {
-			user = connectionMb.getUser();
-			commandeDto = commandeMb.getCommande();
-			if (ucTransactionBancaire.verifierSolde(nomTitulaire,commandeMb.getMontantTotalCommande(), carteDto )) {
-				commandeDto = ucClient.passerCommande((ClientDto) user, commandeMb.getListLigneDeCommande(),
-						commandeDto);
-				panierMb.getListLigneDeCommande().clear();
-				panierMb.getMapLigneCmd().clear();
-				return "confirmationCommande.jsf?faces-redirect=true";
-			} else {
-				messageErreurPaiement = "Erreur avec vos informations bancaires, veuillez réessayer";
-				return messageErreurPaiement;
-			}
-		} else {
-			return "/login.xhtml?faces-redirect=true";
-		}
-	}
+        if (connectionMb != null && connectionMb.getUser() != null) {
+            user = connectionMb.getUser();
+            commandeDto = commandeMb.getCommande();
+            if (ucTransactionBancaire.verifierSolde(nomTitulaire,
+                    commandeMb.getMontantTotalCommande(), carteDto)) {
+                commandeDto = ucClient.passerCommande((ClientDto) user,
+                        commandeMb.getListLigneDeCommande(), commandeDto);
+                panierMb.getCommandeDto().getLignesDeCommande().clear();
+                panierMb.getMapLigneCmd().clear();
+                return "confirmationCommande.jsf?faces-redirect=true";
+            } else {
+                messageErreurPaiement = "Erreur avec vos informations bancaires, veuillez réessayer";
+                return messageErreurPaiement;
+            }
+        } else {
+            return "/login.xhtml?faces-redirect=true";
+        }
+    }
 
     /**
      * Accesseur en lecture du champ <code>user</code>.
@@ -249,18 +246,19 @@ public class PaiementMB {
         ucClient = paramUcClient;
     }
 
-	public CarteBancaireDto getCarteDto() {
-		return carteDto;
-	}
+    public CarteBancaireDto getCarteDto() {
+        return carteDto;
+    }
 
-	public void setCarteDto(CarteBancaireDto carteDto) {
-		this.carteDto = carteDto;
-	}
-	 public String getNomTitulaire() {
-			return nomTitulaire;
-		}
+    public void setCarteDto(CarteBancaireDto carteDto) {
+        this.carteDto = carteDto;
+    }
 
-		public void setNomTitulaire(String nomTitulaire) {
-			this.nomTitulaire = nomTitulaire;
-		}
+    public String getNomTitulaire() {
+        return nomTitulaire;
+    }
+
+    public void setNomTitulaire(String nomTitulaire) {
+        this.nomTitulaire = nomTitulaire;
+    }
 }
