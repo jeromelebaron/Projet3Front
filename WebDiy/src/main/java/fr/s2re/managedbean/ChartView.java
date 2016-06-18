@@ -53,6 +53,7 @@ public class ChartView implements Serializable {
 
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
+        model.setAnimate(true);
         int max = 0;
         int min = connexionParRegion.get(0).getQteConnexion();
         final ChartSeries region = new ChartSeries();
