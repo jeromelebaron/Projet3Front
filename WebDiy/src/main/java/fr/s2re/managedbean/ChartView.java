@@ -70,6 +70,7 @@ public class ChartView implements Serializable {
         }
         model.addSeries(region);
         Axis axisY = model.getAxis(AxisType.Y);
+        axisY.setLabel("Nb de connexions");
         axisY.setMin(min / 2);
         axisY.setMax(max + min);
         return model;
