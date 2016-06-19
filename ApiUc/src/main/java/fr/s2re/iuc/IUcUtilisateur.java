@@ -18,6 +18,7 @@ public interface IUcUtilisateur {
     UtilisateurDto seConnecter(String paramMail, String paramMdp);
 
     // Recherche Produit
+    ProduitDto getProduitById(int id);
     List<CategorieDto> getCatgByCatg(CategorieDto paraCategorieDto);
 
     List<CategorieDto> getAllCatg();

@@ -89,6 +89,7 @@ public class UcUtilisateur implements IUcUtilisateur {
     @Override
     public List<ProduitDto> getProduitByMarque(MarqueDto paramMarque) {
         return bProduit.getByMarque(paramMarque);
+       
     }
 
     @Override
@@ -175,4 +176,9 @@ public class UcUtilisateur implements IUcUtilisateur {
     public AdresseDto retournerAdresseParId(int paramId) {
         return bAdresse.getById(paramId);
     }
+
+	@Override
+	public ProduitDto getProduitById(int id) {
+		return bProduit.getPdtById(id);
+	}
 }
