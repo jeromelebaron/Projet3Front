@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Statistiques de connexion</title>
+	<title>Statistiques concernant les catégories</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords"
@@ -15,29 +15,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
     function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-	<script src="js/simpleCart.min.js"> </script>
 	<link href="css/style.css" rel='stylesheet' type='text/css' />
 	<link
 		href='//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900'
 		rel='stylesheet' type='text/css'></link>
-	<script src="js/jquery.easydropdown.js"></script>
-	<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
 	<link href="css/magnific-popup.css" rel="stylesheet" type="text/css"></link>
-	<script>
-            $(document).ready(function() {
-                $('.popup-with-zoom-anim').magnificPopup({
-                    type: 'inline',
-                    fixedContentPos: false,
-                    fixedBgPos: true,
-                    overflowY: 'auto',
-                    closeBtnInside: true,
-                    preloader: false,
-                    midClick: true,
-                    removalDelay: 300,
-                    mainClass: 'my-mfp-zoom-in'
-            });
-        });
-        </script>
 </h:head>
 <h:body>
 	<h:form>
@@ -86,15 +68,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</nav>
 						</div>
 						<div class="col-md-9">
-							<h3 class="titre-admin">Nombre de connexions par région</h3>
-							<div>
-								<p:chart type="bar" model="#{chartView.barModel}"
-									style="height:450px" />
-							</div>
-							<h3 class="titre-admin">Répartition des durées de connexions par jour</h3>
-							<div>
-								<iframe id="connexion-jour"
-									src="http://localhost:5601/app/kibana#/visualize/edit/Dur%C3%A9e-de-connexion-par-jour?embed=true&amp;_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-15m,mode:quick,to:now))&amp;_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),uiState:(),vis:(aggs:!((id:'1',params:(),schema:metric,type:count),(id:'2',params:(customLabel:'Jour%20de%20la%20semaine',field:jourSemaine,order:desc,orderBy:'1',size:7),schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,isDonut:!f,shareYAxis:!t),title:'Dur%C3%A9e%20de%20connexion%20par%20jour',type:pie))"></iframe>
+							<h3 class="col-md-12 titre-admin">Répartition des ventes par
+								catégories avec référence des deux meilleures ventes</h3>
+							<div class="col-md-12">
+								<iframe
+									src="http://localhost:5601/app/kibana#/visualize/edit/Vente-par-cat%C3%A9gorie-puis-deux-meilleurs-produits?embed=true&amp;_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-15m,mode:quick,to:now))&amp;_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),uiState:(vis:(legendOpen:!t)),vis:(aggs:!((id:'1',params:(customLabel:'Nombre%20de%20ventes'),schema:metric,type:count),(id:'2',params:(customLabel:Cat%C3%A9gorie,field:categorie.nomCategorie,order:desc,orderBy:'1',size:10),schema:segment,type:terms),(id:'3',params:(customLabel:'R%C3%A9f%C3%A9rence%20du%20produit',field:produit.nomProduit,order:desc,orderBy:'1',size:2),schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,isDonut:!f,shareYAxis:!t),title:'Vente%20par%20cat%C3%A9gorie%20puis%20deux%20meilleurs%20produits',type:pie))"
+									height="600" width="800"></iframe>
 							</div>
 						</div>
 					</div>

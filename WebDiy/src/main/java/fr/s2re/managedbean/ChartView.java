@@ -83,7 +83,6 @@ public class ChartView implements Serializable {
     private void createBarModel() {
         barModel = initBarModel();
 
-        barModel.setTitle("Nombre de connexions par régions");
         barModel.setLegendPosition("n");
 
         Axis xAxis = barModel.getAxis(AxisType.X);

@@ -3566,23 +3566,37 @@ a.cpns {
 	align-items: center;
 }
 
-.btn-ajouter{
+.btn-ajouter {
 	background: rgb(49, 194, 219);
 	border-color: rgb(49, 194, 219);
 }
 
-.erreur{
+.erreur {
 	color: red;
 }
 
-.titre-admin{
+.titre-admin {
 	margin-bottom: 30px;
 }
 
-.connexion-admin{
+.connexion-admin {
 	margin-top: 20px;
 }
 
-.img-stat{
+.img-stat {
 	width: 100%;
+}
+
+.li-admin {
+	margin: 10px 0px;
+}
+
+#connexion-jour {
+	width: 762px;
+	margin-left: 81px;
+	height: 400px;
+}
+
+.titre-admin{
+	margin: 20px 0px;
 }

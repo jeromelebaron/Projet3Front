@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Répartitions des connexions par région</title>
+	<title>Statistique de ventes</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords"
@@ -56,11 +56,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<h3 class="menu_head">Statistiques</h3>
 									<div id="liste-categories">
 										<ul class="nav">
-											<li><a href="administrationaccueil.jsf">Connexions</a></li>
-											<li><a>Catégories</a></li>
-											<li><h:commandLink
-													action="#{meilleurVenteMb.consulterMeilleuresVentes()}"
-													value="Ventes" /></li>
+											<li class="li-admin"><a href="administrationaccueil.jsf">Connexions</a></li>
+                                            <li class="li-admin"><a
+                                                href="administrationcategories.jsf">Catégories</a></li>
+                                            <li class="li-admin"><h:commandLink
+                                                    action="#{meilleurVenteMb.consulterMeilleuresVentes()}"
+                                                    value="Ventes" /></li>
 										</ul>
 									</div>
 								</div>
@@ -68,7 +69,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="col-md-9">
 							<div class="row">
-								<h3 class="col-md-12">5 meilleures ventes</h3>
+								<h3 class="col-md-12 titre-admin">5 meilleures ventes de produits</h3>
 								<ui:repeat var="produitDto" varStatus="numero"
 									value="#{meilleurVenteMb.produitsDto}">
 									<div class="col-md-2">
@@ -86,11 +87,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</ui:repeat>
 							</div>
 							<div class="row">
-								<h3 class="col-md-12">Répartition des ventes par mois</h3>
-								<div>
+								<h3 class="col-md-12 titre-admin">Répartition des ventes par mois</h3>
+								<div class="col-md-12">
 									<iframe
 										src="http://localhost:5601/app/kibana#/visualize/edit/Quantit%C3%A9-vendues-par-mois?embed=true&amp;_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-15m,mode:quick,to:now))&amp;_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),uiState:(),vis:(aggs:!((id:'1',params:(customLabel:'Quantit%C3%A9%20vendue',field:quantite),schema:metric,type:sum),(id:'2',params:(customLabel:Mois,field:trimestre,order:asc,orderBy:_term,size:12),schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,defaultYExtents:!f,mode:stacked,scale:linear,setYExtents:!f,shareYAxis:!t,times:!(),yAxis:()),title:'Quantit%C3%A9%20vendues%20par%20mois',type:histogram))"
-										height="600" width="800"></iframe>
+										height="400" width="800"></iframe>
 								</div>
 							</div>
 						</div>
