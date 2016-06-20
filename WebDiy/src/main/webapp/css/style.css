@@ -3574,3 +3574,15 @@ a.cpns {
 .erreur{
 	color: red;
 }
+
+.titre-admin{
+	margin-bottom: 30px;
+}
+
+.connexion-admin{
+	margin-top: 20px;
+}
+
+.img-stat{
+	width: 100%;
+}

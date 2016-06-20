@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Répartitions des connexions par région</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords"
+		content="Luxury Furnish Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+	<script type="application/x-javascript"> 
+    addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
+    function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<script src="js/simpleCart.min.js"> </script>
+	<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<link
+		href='//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900'
+		rel='stylesheet' type='text/css'></link>
+	<script src="js/jquery.easydropdown.js"></script>
+	<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+	<link href="css/magnific-popup.css" rel="stylesheet" type="text/css"></link>
+	<script>
+            $(document).ready(function() {
+                $('.popup-with-zoom-anim').magnificPopup({
+                    type: 'inline',
+                    fixedContentPos: false,
+                    fixedBgPos: true,
+                    overflowY: 'auto',
+                    closeBtnInside: true,
+                    preloader: false,
+                    midClick: true,
+                    removalDelay: 300,
+                    mainClass: 'my-mfp-zoom-in'
+            });
+        });
+        </script>
+</h:head>
+<h:body>
+	<h:form>
+		<header>
+			<div class="header">
+				<div class="container">
+					<div class="header-top">
+						<div class="logo">
+							<a href="accueil.jsf"><h6>DIY Decor Home</h6> <img
+								src="images/logo5.png" /> </a>
+						</div>
+						<div class="header_right">
+							<ul class="social">
+								<li><a href=""> <i class="fb"> </i>
+								</a></li>
+								<li><a href=""><i class="tw"> </i> </a></li>
+								<li><a href=""><i class="utube"> </i> </a></li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+				</div>
+			</div>
+		</header>
+		<div class="main">
+			<div class="content_box">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3">
+							<nav>
+								<div class="menu_box">
+									<h3 class="menu_head">Statistiques</h3>
+									<div id="liste-categories">
+										<ul class="nav">
+											<li><a href="administrationaccueil.jsf">Connexions</a></li>
+											<li><a>Catégories</a></li>
+											<li><h:commandLink
+													action="#{meilleurVenteMb.consulterMeilleuresVentes()}"
+													value="Ventes" /></li>
+										</ul>
+									</div>
+								</div>
+							</nav>
+						</div>
+						<div class="col-md-9">
+							<div>
+								<p:chart type="bar" model="#{chartView.barModel}"
+									style="height:450px" />
+							</div>
+							<div>
+								<iframe
+									src="http://localhost:5601/app/kibana#/visualize/edit/Dur%C3%A9e-de-connexion-par-jour?embed=true&amp;_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-15m,mode:quick,to:now))&amp;_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),uiState:(),vis:(aggs:!((id:'1',params:(),schema:metric,type:count),(id:'2',params:(customLabel:'Jour%20de%20la%20semaine',field:jourSemaine,order:desc,orderBy:'1',size:7),schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,isDonut:!f,shareYAxis:!t),title:'Dur%C3%A9e%20de%20connexion%20par%20jour',type:pie))"
+									height="600" width="800"></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="footer">
+				<div class="container">
+					<div class="footer-grid">
+						<h3>Nous connaitre</h3>
+						<ul class="list1">
+							<li><a href="contact.jsf">Contact</a></li>
+							<li><a href="about.jsf">A propos</a></li>
+							<li><a href="about.jsf">Recherche avancée</a></li>
+							<li><a href="about.jsf">Mobile</a></li>
+						</ul>
+					</div>
+					<div class="footer-grid">
+						<h3>Newsletter</h3>
+						<p class="footer_desc">S'inscrire à la newsletter</p>
+						<div class="search_footer">
+							<input type="text" class="text" value="Email"
+								onfocus="this.value = '';"
+								onblur="if (this.value == '') {this.value = 'Email';}" /><input
+								type="submit" value="S'abonner" />
+						</div>
+						<img src="images/payment.png" class="img-responsive" alt="" />
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="footer_bottom">
+				<div class="container">
+					<div class="copy">
+						<p>
+							Copyright
+							<!--  &copy;-->
+							2016 DIY Decor Home. Tous droits reservés . Design par <a
+								href="http://www.afcepf.fr/" target="_blank">S2RE</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</h:form>
+</h:body>
+</html>

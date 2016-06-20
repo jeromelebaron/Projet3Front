@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Connexion à l'espace d'administration</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords"
+		content="Luxury Furnish Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+	<script type="application/x-javascript"> 
+    addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
+    function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<link
+		href='//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900'
+		rel='stylesheet' type='text/css'></link>
+	<link href="css/magnific-popup.css" rel="stylesheet" type="text/css"></link>
+</h:head>
+<h:body>
+	<h:form>
+		<header>
+			<div class="header">
+				<div class="container">
+					<div class="header-top">
+						<div class="logo">
+							<a href="accueil.jsf"><h6>DIY Decor Home</h6> <img
+								src="images/logo5.png" /> </a>
+						</div>
+						<div class="header_right">
+							<ul class="social">
+								<li><a href=""> <i class="fb"> </i>
+								</a></li>
+								<li><a href=""><i class="tw"> </i> </a></li>
+								<li><a href=""><i class="utube"> </i> </a></li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+				</div>
+			</div>
+		</header>
+		<div class="main">
+			<div class="content_box">
+				<div class="container">
+					<div class="row col-md-12 titre-admin">
+						<h2>Espace d'administration DIY</h2>
+					</div>
+					<div class="row">
+						<label class="col-md-offset-1 col-md-2">Login : </label>
+						<h:inputText value="#{administrationMB.login}"
+							styleClass="col-md-2" />
+					</div>
+					<div class="row">
+						<label class="col-md-offset-1 col-md-2">Mot de passe : </label>
+						<h:inputText value="#{administrationMB.motDePasse}"
+							styleClass="col-md-2" />
+					</div>
+					<div class="row">
+						<div class="col-md-offset-1 col-md-5 center-enfants">
+							<h:commandButton action="#{administrationMB.connexion()}"
+								value="Connexion"
+								styleClass="btn btn-primary connexion-admin col-md-3" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="footer">
+				<div class="container">
+					<div class="footer-grid">
+						<h3>Nous connaitre</h3>
+						<ul class="list1">
+							<li><a href="contact.jsf">Contact</a></li>
+							<li><a href="about.jsf">A propos</a></li>
+							<li><a href="about.jsf">Recherche avancée</a></li>
+							<li><a href="about.jsf">Mobile</a></li>
+						</ul>
+					</div>
+					<div class="footer-grid">
+						<h3>Newsletter</h3>
+						<p class="footer_desc">S'inscrire à la newsletter</p>
+						<div class="search_footer">
+							<input type="text" class="text" value="Email"
+								onfocus="this.value = '';"
+								onblur="if (this.value == '') {this.value = 'Email';}" /><input
+								type="submit" value="S'abonner" />
+						</div>
+						<img src="images/payment.png" class="img-responsive" alt="" />
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="footer_bottom">
+				<div class="container">
+					<div class="copy">
+						<p>
+							Copyright
+							<!--  &copy;-->
+							2016 DIY Decor Home. Tous droits reservés . Design par <a
+								href="http://www.afcepf.fr/" target="_blank">S2RE</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</h:form>
+</h:body>
+</html>
