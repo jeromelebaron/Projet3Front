@@ -112,9 +112,10 @@ public class PanierMb {
     public String supprProduit(Integer paramIdPdt) {
         Iterator<LigneDeCommandeDto> iterator = commandeDto.getLignesDeCommande().iterator();
         while (iterator.hasNext()) {
-            Integer idProduit = iterator.next().getProduit().getId();
-            if (idProduit == paramIdPdt) {
+            LigneDeCommandeDto ligneCommande = iterator.next();
+            if (ligneCommande.getProduit().getId() == paramIdPdt) {
                 // On supprime l'élément courant de la liste
+                totalProduits -= ligneCommande.getQuantite();
                 iterator.remove();
             }
         }

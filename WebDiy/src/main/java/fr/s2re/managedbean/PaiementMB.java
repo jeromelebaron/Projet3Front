@@ -92,6 +92,7 @@ public class PaiementMB {
                         commandeMb.getListLigneDeCommande(), commandeDto);
                 panierMb.getCommandeDto().getLignesDeCommande().clear();
                 panierMb.getMapLigneCmd().clear();
+                panierMb.setTotalProduits(0);
                 return "confirmationCommande.jsf?faces-redirect=true";
             } else {
                 messageErreurPaiement = "Erreur avec vos informations bancaires, veuillez réessayer";
